@@ -1,37 +1,27 @@
-interface AddColumn {
+export interface AddColumn {
   'type': AddColumnType;
   'id': string;
   'name': string;
 }
-export { AddColumn };
 
-type AddColumnType = "AddColumn";
-export { AddColumnType };
-type BoardCommand = AddColumn | CreateCard;
-export { BoardCommand };
-type BoardEvent = ColumnAdded | CardCreated;
-export { BoardEvent };
-interface CardCreated {
+export type AddColumnType = "AddColumn";
+export type BoardCommand = AddColumn | CreateCard;
+export type BoardEvent = ColumnAdded | CardCreated;
+export interface CardCreated {
   'type': CardCreatedType;
   'name': string;
 }
-export { CardCreated };
 
-type CardCreatedType = "CardCreatedType";
-export { CardCreatedType };
-interface ColumnAdded {
+export type CardCreatedType = "CardCreatedType";
+export interface ColumnAdded {
   'type': ColumnAddedType;
   'name': string;
 }
-export { ColumnAdded };
 
-type ColumnAddedType = "ColumnAdded";
-export { ColumnAddedType };
-interface CreateCard {
+export type ColumnAddedType = "ColumnAdded";
+export interface CreateCard {
   'type': CreateCardType;
   'name': string;
 }
-export { CreateCard };
 
-type CreateCardType = "CreateCard";
-export { CreateCardType };
+export type CreateCardType = "CreateCard";
