@@ -5,10 +5,10 @@ interface BoardEvent {
   /**
    * Tipo
    */
-  reservedType?: BoardEventType;
+  'type': BoardEventType;
   /**
    * Contenido del mensaje.
    */
-  data: ColumnAdded | CardCreated;
+  'data': ColumnAdded | CardCreated;
 }
 export { BoardEvent };

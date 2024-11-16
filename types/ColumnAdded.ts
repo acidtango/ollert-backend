@@ -1,5 +1,5 @@
 
 interface ColumnAdded {
-  reservedName: string;
+  'name': string;
 }
 export { ColumnAdded };

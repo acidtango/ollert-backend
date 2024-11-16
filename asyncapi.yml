@@ -59,7 +59,7 @@ components:
       type: object
       additionalProperties: false
       required:
-        - name
+        - type
         - data
       properties:
         type:
@@ -78,7 +78,7 @@ components:
       type: object
       additionalProperties: false
       required:
-        - name
+        - type
         - data
       properties:
         type:

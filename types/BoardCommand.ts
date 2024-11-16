@@ -5,10 +5,10 @@ interface BoardCommand {
   /**
    * Tipo
    */
-  reservedType?: BoardCommandType;
+  'type': BoardCommandType;
   /**
    * Contenido del mensaje.
    */
-  data: AddColumn | CreateCard;
+  'data': AddColumn | CreateCard;
 }
 export { BoardCommand };

@@ -1,6 +1,6 @@
 
 interface AddColumn {
-  id: string;
-  reservedName: string;
+  'id': string;
+  'name': string;
 }
 export { AddColumn };

@@ -1,5 +1,5 @@
 
 interface CardCreated {
-  reservedName: string;
+  'name': string;
 }
 export { CardCreated };
