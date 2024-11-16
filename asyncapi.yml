@@ -1,69 +1,129 @@
-asyncapi: 3.0.0
+asyncapi: '3.0.0'
 info:
-  title: Ollert Service
-  version: 1.0.0
-  description: |
-    The Heart-Counter manages popular messages in a Slack workspace by monitoring message reaction data. It also sends an acknowledgment message back to the Slack Server to indicate it has received the message.
+  title: Ollert API
+  version: '1.0.0'
+  description: >
+    The Ollert API provides real-time communication for managing boards, columns, 
+    and cards within a collaborative environment. A board represents a project 
+    or workflow, containing columns that organize cards into categories or statuses. 
+    Cards are individual tasks or activities that can be created, updated, or moved 
+    across columns to reflect progress. Built on WebSockets, the API ensures instant 
+    updates, enabling seamless collaboration and efficient task management for teams of any size.
+
 servers:
   local:
     host: localhost:3000
     protocol: ws
+
 channels:
-  root:
-    address: /
+  boardCommands:
+    address: /boards/{boardId}/commands
+    parameters:
+      boardId:
+        description: Id of the board.
+        default: 6f0ca58d-95ac-4817-9e39-9258f5cc75bd
     messages:
-      columnCreated:
-        $ref: '#/components/messages/columnCreated'
-      cardAdded:
-        $ref: '#/components/messages/cardAdded'
+      Commands:
+        name: Commands
+        title: Commands
+        payload:
+          $ref: '#/components/schemas/BoardCommand'
+  boardEvents:
+    address: /boards/{boardId}/events
+    parameters:
+      boardId:
+        description: Id of the board.
+        default: 6f0ca58d-95ac-4817-9e39-9258f5cc75bd
+    messages:
+      Commands:
+        name: Events
+        title: Evenets
+        payload:
+          $ref: '#/components/schemas/BoardEvent'
 operations:
-  columnCreatedListener:
+  addColumn:
     action: receive
     channel:
-      $ref: '#/channels/root'
-    messages:
-      - $ref: '#/channels/root/messages/columnCreated'
-  cardAddedListener:
-    action: receive
-    channel:
-      $ref: '#/channels/root'
-    messages:
-      - $ref: '#/channels/root/messages/cardAdded'
+      $ref: '#/channels/boardCommands'
+    reply:
+      channel: 
+        $ref: '#/channels/boardEvents' 
+
 components:
-  messages:
-    columnCreated:
-      summary: <todo>
-      payload:
-        $ref: '#/components/schemas/column'
-    cardAdded:
-      summary: <todo>
-      payload:
-        $ref: '#/components/schemas/card'
   schemas:
-    card:
+    BoardCommandType:
+      type: string
+      description: Tipo
+      enum: [AddColumn, CreateCard]
+    BoardCommand:
       type: object
+      additionalProperties: false
+      required:
+        - name
+        - data
+      properties:
+        type:
+          $ref: '#/components/schemas/BoardCommandType'
+        data:
+          type: object
+          description: Contenido del mensaje.
+          oneOf:
+            - $ref: '#/components/schemas/AddColumn'
+            - $ref: '#/components/schemas/CreateCard'
+    BoardEventType:
+      type: string
+      description: Tipo
+      enum: [ColumnAdded, CardCreated]
+    BoardEvent:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - data
+      properties:
+        type:
+          $ref: '#/components/schemas/BoardEventType'
+        data:
+          type: object
+          description: Contenido del mensaje.
+          oneOf:
+            - $ref: '#/components/schemas/ColumnAdded'
+            - $ref: '#/components/schemas/CardCreated'
+    AddColumn:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ColumnAdded:
+      type: object
+      additionalProperties: false
       required:
         - name
       properties:
         name:
           type: string
-          description: Title of the column
-          examples:
-            - TODO
-    column:
+    CreateCard:
       type: object
+      additionalProperties: false
       required:
-        - title
-        - color
+        - name
       properties:
-        title:
+        name:
           type: string
-          description: Title of the column
-          examples:
-            - TODO
-        color:
+    CardCreated:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+      properties:
+        name:
           type: string
-          description: Color of the column
-          examples:
-            - '#fabada'
+          
+
 x-remoteServers: []

@@ -1,6 +1,6 @@
-# Ollert Service 1.0.0 documentation
+# Ollert API 1.0.0 documentation
 
-The Heart-Counter manages popular messages in a Slack workspace by monitoring message reaction data. It also sends an acknowledgment message back to the Slack Server to indicate it has received the message.
+The Ollert API provides real-time communication for managing boards, columns,  and cards within a collaborative environment. A board represents a project  or workflow, containing columns that organize cards into categories or statuses.  Cards are individual tasks or activities that can be created, updated, or moved  across columns to reflect progress. Built on WebSockets, the API ensures instant  updates, enabling seamless collaboration and efficient task management for teams of any size.
 
 
 ## Table of Contents
@@ -8,8 +8,7 @@ The Heart-Counter manages popular messages in a Slack workspace by monitoring me
 * [Servers](#servers)
   * [local](#local-server)
 * [Operations](#operations)
-  * [RECEIVE /](#receive--operation)
-  * [RECEIVE /](#receive--operation)
+  * [RECEIVE /boards/{boardId}/column](#receive-boardsboardidcolumn-operation)
 
 ## Servers
 
@@ -22,53 +21,55 @@ The Heart-Counter manages popular messages in a Slack workspace by monitoring me
 
 ## Operations
 
-### RECEIVE `/` Operation
+### RECEIVE `/boards/{boardId}/column` Operation
 
-* Operation ID: `columnCreatedListener`
+* Operation ID: `addColumn`
 
-#### Message `columnCreated`
+#### Parameters
 
-*<todo>*
+| Name | Type | Description | Value | Constraints | Notes |
+|---|---|---|---|---|---|
+| boardId | string | Id of the board. | default (`"6f0ca58d-95ac-4817-9e39-9258f5cc75bd"`) | - | **required**, **parameter location ($message.payload#/boardId)** |
+
+
+Receive **one of** the following messages:
+
+#### Message Adds a column to the board `AddColumn`
 
 ##### Payload
 
 | Name | Type | Description | Value | Constraints | Notes |
 |---|---|---|---|---|---|
 | (root) | object | - | - | - | **additional properties are allowed** |
-| title | string | Title of the column | examples (`"TODO"`) | - | **required** |
-| color | string | Color of the column | examples (`"#fabada"`) | - | **required** |
+| columnId | string | - | - | - | - |
+| name | string | - | - | - | - |
 
 > Examples of payload _(generated)_
 
 ```json
 {
-  "title": "TODO",
-  "color": "#fabada"
+  "columnId": "string",
+  "name": "string"
 }
 ```
 
 
-
-### RECEIVE `/` Operation
-
-* Operation ID: `cardAddedListener`
-
-#### Message `cardAdded`
-
-*<todo>*
+#### Message Moves a column within the board `MoveColumn`
 
 ##### Payload
 
 | Name | Type | Description | Value | Constraints | Notes |
 |---|---|---|---|---|---|
 | (root) | object | - | - | - | **additional properties are allowed** |
-| name | string | Title of the column | examples (`"TODO"`) | - | **required** |
+| columnId | string | - | - | - | - |
+| index | number | - | - | - | - |
 
 > Examples of payload _(generated)_
 
 ```json
 {
-  "name": "TODO"
+  "columnId": "string",
+  "index": 0
 }
 ```
 
