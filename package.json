@@ -7,21 +7,12 @@
     "node": ">=14.15.1"
   },
   "scripts": {
-    "dev": "glee dev",
-    "start": "glee start",
-    "generate-models": "asyncapi models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union"
+    "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union"
   },
-  "keywords": [
-    "glee"
-  ],
-  "dependencies": {
-    "@asyncapi/glee": "^0.37.9"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@asyncapi/cli": "^2.10.0",
     "@types/node": "^20.5.9",
     "@types/ws": "^8.5.13",
-    "openapi-typescript": "^7.4.3",
     "ts-to-zod": "^3.13.0",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
