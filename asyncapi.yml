@@ -1,7 +1,7 @@
-asyncapi: '3.0.0'
+asyncapi: "3.0.0"
 info:
   title: Ollert API
-  version: '1.0.0'
+  version: "1.0.0"
   description: >
     The Ollert API provides real-time communication for managing boards, columns, 
     and cards within a collaborative environment. A board represents a project 
@@ -27,7 +27,7 @@ channels:
         name: Commands
         title: Commands
         payload:
-          $ref: '#/components/schemas/BoardCommand'
+          $ref: "#/components/schemas/BoardCommand"
   boardEvents:
     address: /boards/{boardId}/events
     parameters:
@@ -39,26 +39,29 @@ channels:
         name: Events
         title: Evenets
         payload:
-          $ref: '#/components/schemas/BoardEvent'
+          $ref: "#/components/schemas/BoardEvent"
 operations:
   addColumn:
     action: receive
     channel:
-      $ref: '#/channels/boardCommands'
+      $ref: "#/channels/boardCommands"
     reply:
-      channel: 
-        $ref: '#/channels/boardEvents' 
+      channel:
+        $ref: "#/channels/boardEvents"
 
 components:
   schemas:
+    BoardId:
+      type: string
+      example: 64e5aecf-0fde-4393-a285-4066fc119e66
     BoardCommand:
       oneOf:
-        - $ref: '#/components/schemas/AddColumn'
-        - $ref: '#/components/schemas/CreateCard'
+        - $ref: "#/components/schemas/AddColumn"
+        - $ref: "#/components/schemas/CreateCard"
     BoardEvent:
       oneOf:
-        - $ref: '#/components/schemas/ColumnAdded'
-        - $ref: '#/components/schemas/CardCreated'
+        - $ref: "#/components/schemas/ColumnAdded"
+        - $ref: "#/components/schemas/CardCreated"
     AddColumnType:
       type: string
       enum: [AddColumn]
@@ -69,6 +72,7 @@ components:
         - type
         - id
         - name
+        - boardId
       properties:
         type:
           $ref: "#/components/schemas/AddColumnType"
@@ -76,6 +80,8 @@ components:
           type: string
         name:
           type: string
+        boardId:
+          $ref: "#/components/schemas/BoardId"
     ColumnAddedType:
       type: string
       enum: [ColumnAdded]
@@ -85,11 +91,14 @@ components:
       required:
         - type
         - name
+        - boardId
       properties:
         type:
           $ref: "#/components/schemas/ColumnAddedType"
         name:
           type: string
+        boardId:
+          $ref: "#/components/schemas/BoardId"
 
     CreateCardType:
       type: string
@@ -100,11 +109,14 @@ components:
       required:
         - type
         - name
+        - boardId
       properties:
         type:
-          $ref: '#/components/schemas/CreateCardType'
+          $ref: "#/components/schemas/CreateCardType"
         name:
           type: string
+        boardId:
+          $ref: "#/components/schemas/BoardId"
     CardCreatedType:
       type: string
       enum: [CardCreatedType]
@@ -114,8 +126,11 @@ components:
       required:
         - type
         - name
+        - boardId
       properties:
         type:
-          $ref: '#/components/schemas/CardCreatedType'
+          $ref: "#/components/schemas/CardCreatedType"
         name:
           type: string
+        boardId:
+          $ref: "#/components/schemas/BoardId"
