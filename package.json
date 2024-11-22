@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "glee dev",
     "start": "glee start",
-    "generate-models": "asyncapi generate models typescript asyncapi.yml -o types  --tsExportType named --tsIncludeComments --tsModelType interface"
+    "generate-models": "asyncapi models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union"
   },
   "keywords": [
     "glee"
@@ -18,6 +18,7 @@
     "@asyncapi/glee": "^0.37.9"
   },
   "devDependencies": {
+    "@asyncapi/cli": "^2.10.0",
     "@types/node": "^20.5.9",
     "@types/ws": "^8.5.13",
     "openapi-typescript": "^7.4.3",

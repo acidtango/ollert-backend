@@ -1,5 +1,5 @@
 rm types/*
-asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union
+/Users/danielramos/Documents/repos/others/cli/bin/run_bin generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union
 for file in types/*
 do
     echo "" >> "$file"

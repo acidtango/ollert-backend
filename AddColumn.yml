@@ -1,33 +1,31 @@
-components:
-  schemas:
-    AddColumnType:
+AddColumnType:
+  type: string
+  enum: [AddColumn]
+AddColumn:
+  type: object
+  additionalProperties: false
+  required:
+    - type
+    - id
+    - name
+  properties:
+    type:
+      $ref: "#/AddColumnType"
+    id:
       type: string
-      enum: [AddColumn]
-    AddColumn:
-      type: object
-      additionalProperties: false
-      required:
-        - type
-        - id
-        - name
-      properties:
-        type:
-          $ref: "#/components/schemas/AddColumnType"
-        id:
-          type: string
-        name:
-          type: string
-    ColumnAddedType:
+    name:
       type: string
-      enum: [ColumnAdded]
-    ColumnAdded:
-      type: object
-      additionalProperties: false
-      required:
-        - type
-        - name
-      properties:
-        type:
-          $ref: "#/components/schemas/ColumnAddedType"
-        name:
-          type: string
+ColumnAddedType:
+  type: string
+  enum: [ColumnAdded]
+ColumnAdded:
+  type: object
+  additionalProperties: false
+  required:
+    - type
+    - name
+  properties:
+    type:
+      $ref: "#/ColumnAddedType"
+    name:
+      type: string

@@ -71,7 +71,7 @@ components:
         - name
       properties:
         type:
-          $ref: '#/components/schemas/AddColumnType'
+          $ref: "#/components/schemas/AddColumnType"
         id:
           type: string
         name:
@@ -87,9 +87,10 @@ components:
         - name
       properties:
         type:
-          $ref: '#/components/schemas/ColumnAddedType'
+          $ref: "#/components/schemas/ColumnAddedType"
         name:
           type: string
+
     CreateCardType:
       type: string
       enum: [CreateCard]
