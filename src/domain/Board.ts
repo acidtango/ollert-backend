@@ -1,4 +1,4 @@
-import type {BoardId} from "./BoardId.js";
+import type {BoardId} from "./BoardId.ts";
 
 export class Board {
   private readonly id: BoardId;

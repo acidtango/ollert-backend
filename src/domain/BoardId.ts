@@ -8,4 +8,8 @@ export class BoardId {
   getValue() {
     return this.value;
   }
+
+  toString() {
+    return this.value;
+  }
 }

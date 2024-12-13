@@ -5,6 +5,7 @@ import type {Handler} from "./Handler.ts";
 import {BoardRepositoryFake} from "../../tests/BoardRepositoryFake.ts";
 import type {Board} from "../domain/Board.ts";
 import {BoardId} from "../domain/BoardId.ts";
+import {BoardNotFound} from "../domain/BoardNotFound.ts";
 
 export class AddColumnHandler implements Handler {
   private eventBus: EventBus;
@@ -21,6 +22,10 @@ export class AddColumnHandler implements Handler {
 
   async handle(command: AddColumn) {
     const board = (await this.boardRepository.findBy(new BoardId(command.boardId))) as Board;
+
+    if (!board) {
+      throw new BoardNotFound(new BoardId(command.boardId));
+    }
 
     board.addColumn(command.boardId, command.name)
 
