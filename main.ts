@@ -11,7 +11,7 @@ const commandsServer = new WebSocketServer({ noServer: true });
 const eventsServer = new WebSocketServer({ noServer: true });
 
 const eventBus = new EventBusWebSocket(eventsServer);
-const handlers = [new AddColumnHandler(eventBus), new CreateCardHandler()];
+const handlers = [new AddColumnHandler(eventBus, boardRepository), new CreateCardHandler()];
 const router = new Router(commandsServer, eventsServer);
 
 commandsServer.on("connection", (ws: WebSocket) => {
