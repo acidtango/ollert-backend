@@ -9,7 +9,7 @@ export class Board {
   }
 
   hasColumn(columnName: string) {
-    return true
+    return this.columns.some(column => column.name === columnName);
   }
 
   getId() {
