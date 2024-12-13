@@ -1,6 +1,6 @@
 import {BoardId} from "./BoardId.ts";
 import {Board} from "./Board.ts";
-import {BoardNotFound} from "./BoardNotFound.js";
+import {BoardNotFound} from "./BoardNotFound.ts";
 
 export abstract class BoardRepository {
   abstract findBy(id: BoardId): Promise<Board | undefined>;

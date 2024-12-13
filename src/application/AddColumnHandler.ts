@@ -22,11 +22,7 @@ export class AddColumnHandler implements Handler {
 
   async handle(command: AddColumn) {
     const boardId = new BoardId(command.boardId);
-    const board = await this.boardRepository.findBy(boardId);
-
-    if (!board) {
-      throw new BoardNotFound(boardId);
-    }
+    const board = await this.boardRepository.findOrThrowBy(boardId);
 
     board.addColumn(command.boardId, command.name)
 
