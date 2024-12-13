@@ -2,16 +2,14 @@ import type {AddColumn} from "../../types/types.ts";
 import {AddColumnSchema} from "../../types/types.zod.ts";
 import type {EventBus} from "../domain/EventBus.ts";
 import type {Handler} from "./Handler.ts";
-import {BoardRepositoryFake} from "../../tests/BoardRepositoryFake.ts";
-import type {Board} from "../domain/Board.ts";
 import {BoardId} from "../domain/BoardId.ts";
-import {BoardNotFound} from "../domain/BoardNotFound.ts";
+import type {BoardRepository} from "../domain/BoardRepository.ts";
 
 export class AddColumnHandler implements Handler {
   private eventBus: EventBus;
-  private boardRepository: BoardRepositoryFake;
+  private boardRepository: BoardRepository;
 
-  constructor(eventBus: EventBus, boardRepository: BoardRepositoryFake) {
+  constructor(eventBus: EventBus, boardRepository: BoardRepository) {
     this.eventBus = eventBus;
     this.boardRepository = boardRepository;
   }

@@ -3,7 +3,7 @@ import {Board} from "./Board.ts";
 import {BoardNotFound} from "./BoardNotFound.ts";
 
 export abstract class BoardRepository {
-  abstract findBy(id: BoardId): Promise<Board | undefined>;
+  protected abstract findBy(id: BoardId): Promise<Board | undefined>;
   abstract save(board: Board): Promise<void>;
 
   async findOrThrowBy(id: BoardId): Promise<Board> {
