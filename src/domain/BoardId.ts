@@ -8,8 +8,4 @@ export class BoardId {
   getValue() {
     return this.value;
   }
-
-  equals(other: BoardId) {
-    return this.value === other.value;
-  }
 }
