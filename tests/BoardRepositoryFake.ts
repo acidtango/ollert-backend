@@ -1,11 +1,16 @@
 import {Board} from "../src/domain/Board.ts";
-import type {BoardId} from "../src/domain/BoardId.js";
+import {BoardId} from "../src/domain/BoardId.ts";
+import {WALLBOX_BOARD_ID, wallboxBoardId} from "./BoardIdMother.ts";
 
 export class BoardRepositoryFake {
 
-  private boards: Map<BoardId, Board> = new Map()
+  private boards: Map<string, Board> = new Map()
 
   private latestSavedBoard?: Board;
+
+  constructor() {
+    this.boards.set(WALLBOX_BOARD_ID, new Board(wallboxBoardId));
+  }
 
   getLatestSaved(): Board {
     if (!this.latestSavedBoard) {
@@ -16,11 +21,11 @@ export class BoardRepositoryFake {
   }
 
   async findBy(id: BoardId): Promise<Board | undefined> {
-    return new Board(id);
+    return this.boards.get(id.getValue());
   }
 
   async save(board: Board) {
-    this.boards.set(board.getId(), board);
+    this.boards.set(board.getId().getValue(), board);
     this.latestSavedBoard = board;
   }
 }
