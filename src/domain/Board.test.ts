@@ -11,4 +11,12 @@ describe("Board", () => {
 
     assert.ok(isEmpty);
   });
+
+  it("can add columns", () => {
+    const board = new Board(new BoardId("ecc81f64-7925-4004-b7e1-4f1f26dbbba5"));
+
+    board.addColumn("abfe40bf-22b8-4692-8585-cea01b809493", "TODO");
+
+    assert.ok(!board.isEmpty());
+  });
 });

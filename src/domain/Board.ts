@@ -2,6 +2,7 @@ import type {BoardId} from "./BoardId.js";
 
 export class Board {
   private readonly id: BoardId;
+  private readonly columns: Array<{id: string, name: string}> = [];
 
   constructor(id: BoardId) {
     this.id = id;
@@ -16,10 +17,10 @@ export class Board {
   }
 
   addColumn(columnId: string, name: string) {
-
+    this.columns.push({id: columnId, name})
   }
 
   isEmpty() {
-    return true;
+    return this.columns.length === 0;
   }
 }
