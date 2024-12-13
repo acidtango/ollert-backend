@@ -1,14 +1,16 @@
 import {Board} from "../src/domain/Board.ts";
 import {BoardId} from "../src/domain/BoardId.ts";
 import {WALLBOX_BOARD_ID, wallboxBoardId} from "./BoardIdMother.ts";
+import {BoardRepository} from "../src/domain/BoardRepository.ts";
 
-export class BoardRepositoryFake {
+export class BoardRepositoryFake extends BoardRepository {
 
   private boards: Map<string, Board> = new Map()
 
   private latestSavedBoard?: Board;
 
   constructor() {
+    super()
     this.boards.set(WALLBOX_BOARD_ID, new Board(wallboxBoardId));
   }
 
