@@ -1,1 +1,5 @@
 > npm install -g @asyncapi/cli
+
+# Generate Schemas
+
+This project is API-first, meaning all the types frome from the `asyncapi.yml` file. It generates many .ts files for each component. Then, these files are merged into one `types.ts`. This file can then be transformed to zod schemas by using ts-to-zod. All this process is done automatically with `api.sh` script. There's a script in the `package.json` that invokes it: `npm run generate-api`
