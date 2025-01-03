@@ -37,7 +37,7 @@ channels:
     messages:
       Commands:
         name: Events
-        title: Evenets
+        title: Events
         payload:
           $ref: "#/components/schemas/BoardEvent"
 operations:
@@ -57,11 +57,11 @@ components:
     BoardCommand:
       oneOf:
         - $ref: "#/components/schemas/AddColumn"
-        - $ref: "#/components/schemas/CreateCard"
+        - $ref: "#/components/schemas/AddCard"
     BoardEvent:
       oneOf:
         - $ref: "#/components/schemas/ColumnAdded"
-        - $ref: "#/components/schemas/CardCreated"
+        - $ref: "#/components/schemas/CardAdded"
     AddColumnType:
       type: string
       enum: [AddColumn]
@@ -100,10 +100,10 @@ components:
         boardId:
           $ref: "#/components/schemas/BoardId"
 
-    CreateCardType:
+    AddCardType:
       type: string
-      enum: [CreateCard]
-    CreateCard:
+      enum: [AddCard]
+    AddCard:
       type: object
       additionalProperties: false
       required:
@@ -112,15 +112,15 @@ components:
         - boardId
       properties:
         type:
-          $ref: "#/components/schemas/CreateCardType"
+          $ref: "#/components/schemas/AddCardType"
         name:
           type: string
         boardId:
           $ref: "#/components/schemas/BoardId"
-    CardCreatedType:
+    CardAddedType:
       type: string
-      enum: [CardCreatedType]
-    CardCreated:
+      enum: [CardAddedType]
+    CardAdded:
       type: object
       additionalProperties: false
       required:
@@ -129,7 +129,7 @@ components:
         - boardId
       properties:
         type:
-          $ref: "#/components/schemas/CardCreatedType"
+          $ref: "#/components/schemas/CardAddedType"
         name:
           type: string
         boardId:

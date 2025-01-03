@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { WebSocketServer, type WebSocket } from "ws";
 import { AddColumnHandler } from "./src/application/AddColumnHandler.ts";
-import { CreateCardHandler } from "./src/application/CreateCardHandler.ts";
+import { AddCardHandler } from "./src/application/AddCardHandler.ts";
 import { EventBusWebSocket } from "./src/infrastructure/EventBusWebSocket.ts";
 import { Controller } from "./src/infrastructure/server/Controller.ts";
 import { Router } from "./src/infrastructure/server/Router.ts";
@@ -12,7 +12,7 @@ const commandsServer = new WebSocketServer({ noServer: true });
 const eventsServer = new WebSocketServer({ noServer: true });
 
 const eventBus = new EventBusWebSocket(eventsServer);
-const handlers = [new AddColumnHandler(eventBus, new BoardRepositoryFake()), new CreateCardHandler()];
+const handlers = [new AddColumnHandler(eventBus, new BoardRepositoryFake()), new AddCardHandler()];
 const router = new Router(commandsServer, eventsServer);
 
 commandsServer.on("connection", (ws: WebSocket) => {
