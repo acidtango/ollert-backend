@@ -17,7 +17,7 @@ servers:
 
 channels:
   boardCommands:
-    address: /boards/{boardId}/commands
+    address: /boards/commands
     parameters:
       boardId:
         description: Id of the board.
@@ -29,7 +29,7 @@ channels:
         payload:
           $ref: "#/components/schemas/BoardCommand"
   boardEvents:
-    address: /boards/{boardId}/events
+    address: /boards/events
     parameters:
       boardId:
         description: Id of the board.
