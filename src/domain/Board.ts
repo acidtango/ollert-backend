@@ -23,4 +23,8 @@ export class Board {
   isEmpty() {
     return this.columns.length === 0
   }
+
+  hasCard(cardName: string) {
+    return false
+  }
 }
