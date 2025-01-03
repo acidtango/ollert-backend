@@ -8,6 +8,7 @@
   },
   "scripts": {
     "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union",
+    "generate-api": "sh api.sh",
     "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts"
   },
   "dependencies": {},
