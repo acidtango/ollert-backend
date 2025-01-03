@@ -56,7 +56,4 @@ describe('AddColumnHandler', () => {
       new BoardNotFound(notExistentBoardId)
     )
   })
-
-  // assert.deepStrictEqual(eventBus.emit.mock.calls[0]?.arguments[0], { type: "COLUMN_CREATED", payload: "" })
-  // expect(eventBus.emit).toHaveBeenCalledWith("columnAdded", { name: "column" });
 })
