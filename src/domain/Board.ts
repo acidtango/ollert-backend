@@ -1,26 +1,26 @@
-import type {BoardId} from "./BoardId.ts";
+import type { BoardId } from './BoardId.ts'
 
 export class Board {
-  private readonly id: BoardId;
-  private readonly columns: Array<{id: string, name: string}> = [];
+  private readonly id: BoardId
+  private readonly columns: Array<{ id: string; name: string }> = []
 
   constructor(id: BoardId) {
-    this.id = id;
+    this.id = id
   }
 
   hasColumn(columnName: string) {
-    return this.columns.some(column => column.name === columnName);
+    return this.columns.some((column) => column.name === columnName)
   }
 
   getId() {
-    return this.id;
+    return this.id
   }
 
   addColumn(columnId: string, name: string) {
-    this.columns.push({id: columnId, name})
+    this.columns.push({ id: columnId, name })
   }
 
   isEmpty() {
-    return this.columns.length === 0;
+    return this.columns.length === 0
   }
 }

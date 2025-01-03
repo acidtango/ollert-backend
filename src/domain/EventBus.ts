@@ -1,3 +1,3 @@
 export interface EventBus {
-  emit(event: unknown): void;
+  emit(event: unknown): void
 }

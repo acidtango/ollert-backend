@@ -1,8 +1,8 @@
-import { type WebSocket } from "ws";
-import { StringToJSONSchema } from "../../../schema.ts";
-import type { BoardCommand } from "../../../types/types.ts";
-import { BoardCommandSchema } from "../../../types/types.zod.ts";
-import type { Handler } from "../../application/Handler.ts";
+import { type WebSocket } from 'ws'
+import { StringToJSONSchema } from '../../../schema.ts'
+import type { BoardCommand } from '../../../types/types.ts'
+import { BoardCommandSchema } from '../../../types/types.zod.ts'
+import type { Handler } from '../../application/Handler.ts'
 
 export class Controller {
   constructor(
@@ -16,16 +16,16 @@ export class Controller {
       .then((data) => BoardCommandSchema.parse(data))
       .then((command: BoardCommand) => {
         for (const handler of this.handlers) {
-          const parsed = handler.schema().safeParse(command);
+          const parsed = handler.schema().safeParse(command)
           if (parsed.success) {
-            const data = parsed.data;
-            return handler.handle(data);
+            const data = parsed.data
+            return handler.handle(data)
           }
         }
-        return Promise.reject(new Error("Unknown command"));
+        return Promise.reject(new Error('Unknown command'))
       })
       .catch((e) => {
-        this.ws.send(JSON.stringify(e));
-      });
+        this.ws.send(JSON.stringify(e))
+      })
   }
 }

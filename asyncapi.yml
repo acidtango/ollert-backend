@@ -54,6 +54,9 @@ components:
     BoardId:
       type: string
       example: 64e5aecf-0fde-4393-a285-4066fc119e66
+    ColumnId:
+      type: string
+      example: 88decc27-4cca-4d7e-82ae-a27d9573e8ce
     BoardCommand:
       oneOf:
         - $ref: "#/components/schemas/AddColumn"
@@ -110,13 +113,14 @@ components:
         - type
         - name
         - boardId
+        - columnId
       properties:
         type:
           $ref: "#/components/schemas/AddCardType"
         name:
           type: string
-        boardId:
-          $ref: "#/components/schemas/BoardId"
+        columnId:
+          $ref: "#/components/schemas/ColumnId"
     CardAddedType:
       type: string
       enum: [CardAddedType]

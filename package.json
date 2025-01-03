@@ -9,12 +9,13 @@
   "scripts": {
     "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union",
     "generate-api": "sh api.sh",
+    "format": "prettier --write src/**/*.ts",
     "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.5.9",
     "@types/ws": "^8.5.13",
+    "prettier": "^3.4.2",
     "ts-to-zod": "^3.13.0",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
