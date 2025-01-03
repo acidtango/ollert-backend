@@ -5,13 +5,14 @@ import { CreateCardHandler } from "./src/application/CreateCardHandler.ts";
 import { EventBusWebSocket } from "./src/infrastructure/EventBusWebSocket.ts";
 import { Controller } from "./src/infrastructure/server/Controller.ts";
 import { Router } from "./src/infrastructure/server/Router.ts";
+import {BoardRepositoryFake} from "./tests/BoardRepositoryFake.ts";
 
 const server = createServer();
 const commandsServer = new WebSocketServer({ noServer: true });
 const eventsServer = new WebSocketServer({ noServer: true });
 
 const eventBus = new EventBusWebSocket(eventsServer);
-const handlers = [new AddColumnHandler(eventBus, boardRepository), new CreateCardHandler()];
+const handlers = [new AddColumnHandler(eventBus, new BoardRepositoryFake()), new CreateCardHandler()];
 const router = new Router(commandsServer, eventsServer);
 
 commandsServer.on("connection", (ws: WebSocket) => {
