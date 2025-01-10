@@ -10,7 +10,9 @@
     "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union",
     "generate-api": "sh api.sh",
     "format": "prettier --write src/**/*.ts",
-    "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts"
+    "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts",
+    "test": "node --experimental-transform-types --disable-warning=ExperimentalWarning --test src/**/*.test.ts",
+    "test:watch": "node --experimental-transform-types --disable-warning=ExperimentalWarning --watch --test src/**/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
