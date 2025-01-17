@@ -1,17 +1,19 @@
-import { describe, it } from 'node:test'
-import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.js'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.js'
-import { AddCardHandler } from './AddCardHandler.js'
 import assert from 'node:assert'
+import { describe, it } from 'node:test'
+import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
+import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import { AddCardHandler } from './AddCardHandler.ts'
 
 describe('AddCardHandler', () => {
   it('should add a card', async () => {
     const boardRepository = new BoardRepositoryFake()
-    const handler = new AddCardHandler()
+    const handler = new AddCardHandler(boardRepository)
 
     await handler.handle({
       type: 'AddCard',
       name: 'Test features',
+      columnId: TODO_COLUMN_ID,
       boardId: WALLBOX_BOARD_ID
     })
 

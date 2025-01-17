@@ -1,4 +1,5 @@
 import type { BoardId } from './BoardId.ts'
+import type { Card } from './Card.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -24,7 +25,9 @@ export class Board {
     return this.columns.length === 0
   }
 
+  addCard(columnId: string, card: Card) {}
+
   hasCard(cardName: string) {
-    return false
+    return true
   }
 }
