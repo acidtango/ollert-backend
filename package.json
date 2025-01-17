@@ -11,6 +11,7 @@
     "generate-api": "sh api.sh",
     "format": "prettier --write src/**/*.ts",
     "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts",
+    "test:unit": "node --experimental-transform-types --disable-warning=ExperimentalWarning --test",
     "test": "node --experimental-transform-types --disable-warning=ExperimentalWarning --test src/**/*.test.ts",
     "test:watch": "node --experimental-transform-types --disable-warning=ExperimentalWarning --watch --test src/**/*.test.ts"
   },
