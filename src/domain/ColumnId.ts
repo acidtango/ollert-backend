@@ -5,7 +5,7 @@ export class ColumnId {
     return new ColumnId(columnId)
   }
 
-  getValue() {
-    return this.columnId
+  equals(otherId: ColumnId) {
+    return this.columnId === otherId.columnId
   }
 }

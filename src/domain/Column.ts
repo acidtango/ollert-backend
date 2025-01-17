@@ -25,6 +25,10 @@ export class Column {
     this.name = ColumnName.fromString(newName)
   }
 
+  hasId(columnId: ColumnId) {
+    return this.id.equals(columnId)
+  }
+
   isEmpty(): boolean {
     return this.cards.length === 0
   }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
 
@@ -50,6 +50,38 @@ describe('Board', () => {
 
     board.addColumn(TODO_COLUMN_ID, 'TODO')
     board.addCard(TODO_COLUMN_ID, card)
+
+    assert(board.hasCard(cardName))
+  })
+
+  it('deletes a column and the board will be empty', () => {
+    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+    board.addColumn(TODO_COLUMN_ID, 'TODO')
+
+    board.delete(todoColumnId)
+
+    assert(board.isEmpty())
+  })
+
+  it('deletes an specific column', () => {
+    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+    board.addColumn(TODO_COLUMN_ID, 'TODO')
+    board.addColumn(DOING_COLUMN_ID, 'DOING')
+
+    board.delete(todoColumnId)
+
+    assert(board.hasColumn('DOING'))
+  })
+
+  it.skip('can add multiple a cards', () => {
+    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+    const cardName = 'Example card'
+    const card = Card.create({ id: 'random', name: cardName })
+
+    board.addColumn(TODO_COLUMN_ID, 'TODO')
+    board.addColumn(DOING_COLUMN_ID, 'DOING')
+
+    board.addCard(DOING_COLUMN_ID, card)
 
     assert(board.hasCard(cardName))
   })

@@ -1,10 +1,11 @@
 import { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
+import type { ColumnId } from './ColumnId.ts'
 
 export class Board {
   private readonly id: BoardId
-  private readonly columns: Array<Column> = []
+  private columns: Array<Column> = []
 
   constructor(id: string) {
     this.id = new BoardId(id)
@@ -29,6 +30,10 @@ export class Board {
   addCard(columnId: string, card: Card) {
     const column = this.columns[0]
     column?.addCard(card)
+  }
+
+  delete(columnId: ColumnId) {
+    this.columns = this.columns.filter((c) => !c.hasId(columnId))
   }
 
   hasCard(cardName: string) {
