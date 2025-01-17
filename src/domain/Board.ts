@@ -1,4 +1,4 @@
-import type { BoardId } from './BoardId.ts'
+import { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 
@@ -6,8 +6,8 @@ export class Board {
   private readonly id: BoardId
   private readonly columns: Array<Column> = []
 
-  constructor(id: BoardId) {
-    this.id = id
+  constructor(id: string) {
+    this.id = new BoardId(id)
   }
 
   hasColumn(columnName: string) {
