@@ -47,3 +47,15 @@ Se habla de que hacer cuando tienes campos grandes como “description”. ¿Apo
 
 Se reafirma nuestra intención de usar optimistic updates en el front.
 Se continuan los tests de cards y se deja el comportamiento básico de ambas cosas definido.
+
+> Día 17/01/2025
+
+Driver: Alberto
+Notas: Alberto
+Asistentes: Hector, Viren, Alberto Gonzalez, Carlos Castellano, Diego Machín, Jorge Daniel, Héctor, Alexis, Daute, Jorge Bodega, Daniel Ramos, Manuel Carrera, Fer
+
+Debate acerca de los mother objects, fixtures, builders
+Debate acerca de pasar primitivos a los agregados o no
+Implementación del handler de AddColumn
+Avances en añadir card a un board
+Borrar columnas de un board
