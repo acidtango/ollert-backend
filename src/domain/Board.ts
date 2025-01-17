@@ -1,16 +1,17 @@
 import type { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
+import { Column } from './Column.ts'
 
 export class Board {
   private readonly id: BoardId
-  private readonly columns: Array<{ id: string; name: string; cards: Card[] }> = []
+  private readonly columns: Array<Column> = []
 
   constructor(id: BoardId) {
     this.id = id
   }
 
   hasColumn(columnName: string) {
-    return this.columns.some((column) => column.name === columnName)
+    return this.columns.some((column) => column.hasName(columnName))
   }
 
   getId() {
@@ -18,7 +19,7 @@ export class Board {
   }
 
   addColumn(columnId: string, name: string) {
-    this.columns.push({ id: columnId, name, cards: [] })
+    this.columns.push(Column.createNew(columnId, name))
   }
 
   isEmpty() {
@@ -27,11 +28,13 @@ export class Board {
 
   addCard(columnId: string, card: Card) {
     const column = this.columns[0]
-    column?.cards.push(card)
+    column?.addCard(card)
   }
 
   hasCard(cardName: string) {
     const column = this.columns[0]
-    return column?.cards.length
+    if (!column) return false
+
+    return !column.isEmpty()
   }
 }

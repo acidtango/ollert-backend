@@ -1,17 +1,18 @@
-import { beforeEach, describe, it } from 'node:test'
-import { Column } from './Column.ts'
 import assert from 'node:assert'
-import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
-import { Card } from './Card.ts'
 import { randomUUID } from 'node:crypto'
-import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
+import { beforeEach, describe, it } from 'node:test'
+import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
+import { Column } from './Column.ts'
+import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
+import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
 
 describe('Column', () => {
   let column: Column
   // TODO: add a ColumnMother
   beforeEach(() => {
-    column = Column.createNew('Default name')
+    column = Column.createNew(TODO_COLUMN_ID, 'Default name')
   })
 
   it('requires a name on creation', () => {
@@ -32,7 +33,13 @@ describe('Column', () => {
 
   it('cannot be created with empty name', () => {
     assert.throws(() => {
-      Column.createNew('')
+      Column.createNew(TODO_COLUMN_ID, '')
+    }, new InvalidColumnNameError(''))
+  })
+
+  it.skip('cannot be created with empty id', () => {
+    assert.throws(() => {
+      Column.createNew('', 'Random column')
     }, new InvalidColumnNameError(''))
   })
 

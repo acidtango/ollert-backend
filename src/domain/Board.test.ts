@@ -44,7 +44,7 @@ describe('Board', () => {
     assert(!board.hasCard('NOT-EXISTANT'))
   })
 
-  it('can finds a card if it is inserted in the board', () => {
+  it('can find a card if it is inserted in the board', () => {
     const board = new Board(new BoardId('ecc81f64-7925-4004-b7e1-4f1f26dbbba5'))
     const cardName = 'Example card'
     const card = Card.create({ id: 'random', name: cardName })
