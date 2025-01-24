@@ -25,6 +25,6 @@ export class AddColumnHandler implements Handler {
     board.addColumn(command.columnId, command.name)
 
     await this.boardRepository.save(board)
-    this.eventBus.emit(board)
+    this.eventBus.emit(board.pullDomainEvents())
   }
 }

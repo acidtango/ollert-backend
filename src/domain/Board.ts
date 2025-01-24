@@ -3,10 +3,12 @@ import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
 import { CardId } from './CardId.ts'
+import type { BoardEvent } from '../../types/types.ts'
 
 export class Board {
   private readonly id: BoardId
   private columns: Array<Column> = []
+  private readonly domainEvents: Array<BoardEvent> = []
 
   constructor(id: string) {
     this.id = new BoardId(id)
@@ -26,6 +28,12 @@ export class Board {
 
   addColumn(columnId: string, name: string) {
     this.columns.push(Column.createNew(columnId, name))
+    this.domainEvents.push({
+      type: 'ColumnAdded',
+      columnId,
+      name,
+      boardId: this.id.getValue()
+    })
   }
 
   isEmpty() {
@@ -48,5 +56,9 @@ export class Board {
 
   hasCard(cardName: string | CardId) {
     return this.columns.some((c) => c.hasCard(cardName))
+  }
+
+  pullDomainEvents() {
+    return this.domainEvents
   }
 }
