@@ -59,3 +59,15 @@ Debate acerca de pasar primitivos a los agregados o no
 Implementación del handler de AddColumn
 Avances en añadir card a un board
 Borrar columnas de un board
+
+> Día 24/01/2025
+
+Driver: Dani
+Notas: Dani
+Asistentes: Virén, Manu, Daute, Héctor, Diego, Jorge Daniel, Fer, Alexis, Daniel Montesino, Santiago, José Barrera, Alberto Mendoza, Carlos Castellano, Alberto Gonzalez, Eduardo
+
+* Empezar a emitir eventos de dominio
+* Hemos testaedo la aplicación arrancándola!
+* Hemos añadido cards a columnas
+* Nos hemos dado cuenta de que no tiene mucho sentido mandar comandos por el Websocket, excepto si son muchos y es entorno colaborativo 🤝🏽
+* Los IDs vienen del front 😎
