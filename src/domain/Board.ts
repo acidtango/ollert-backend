@@ -12,8 +12,12 @@ export class Board {
     this.id = new BoardId(id)
   }
 
-  hasColumn(columnName: string) {
-    return this.columns.some((column) => column.hasName(columnName))
+  hasColumn(nameOrId: string | ColumnId) {
+    if (nameOrId instanceof ColumnId) {
+      return this.columns.some((column) => column.hasId(nameOrId))
+    }
+
+    return this.columns.some((column) => column.hasName(nameOrId))
   }
 
   getId() {

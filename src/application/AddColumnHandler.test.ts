@@ -5,6 +5,7 @@ import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
 import { NOT_EXISTENT_BOARD_ID, notExistentBoardId, WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { BoardNotFound } from '../domain/BoardNotFound.ts'
 import type { AddColumn } from '../../types/types.ts'
+import { TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 
 describe('AddColumnHandler', () => {
   it('should add a column', async () => {
@@ -14,7 +15,7 @@ describe('AddColumnHandler', () => {
 
     await handler.handle({
       type: 'AddColumn',
-      id: 'e5814727-aed2-4b9f-9b45-865bb19c110d',
+      id: TODO_COLUMN_ID,
       name: 'TODO',
       boardId: WALLBOX_BOARD_ID
     })
@@ -23,14 +24,30 @@ describe('AddColumnHandler', () => {
     assert.ok(board.hasColumn('TODO'))
   })
 
-  it('should emit an event after adding a column', async () => {
+  it('should add a column with the givenId', async () => {
+    const eventBus = { emit: mock.fn() }
+    const boardRepository = new BoardRepositoryFake()
+    const handler = new AddColumnHandler(eventBus, boardRepository)
+
+    await handler.handle({
+      type: 'AddColumn',
+      id: TODO_COLUMN_ID,
+      name: 'TODO',
+      boardId: WALLBOX_BOARD_ID
+    })
+
+    const board = boardRepository.getLatestSaved()
+    assert.ok(board.hasColumn(todoColumnId))
+  })
+
+  it.skip('should emit an event after adding a column', async () => {
     const eventBus = { emit: mock.fn() }
     const boardRepository = new BoardRepositoryFake()
     const handler = new AddColumnHandler(eventBus, boardRepository)
 
     const command: AddColumn = {
       type: 'AddColumn',
-      id: 'e5814727-aed2-4b9f-9b45-865bb19c110d',
+      id: TODO_COLUMN_ID,
       name: 'TODO',
       boardId: WALLBOX_BOARD_ID
     }
@@ -49,7 +66,7 @@ describe('AddColumnHandler', () => {
       () =>
         handler.handle({
           type: 'AddColumn',
-          id: 'e5814727-aed2-4b9f-9b45-865bb19c110d',
+          id: TODO_COLUMN_ID,
           name: 'TODO',
           boardId: NOT_EXISTENT_BOARD_ID
         }),

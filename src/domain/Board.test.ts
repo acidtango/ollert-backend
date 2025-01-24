@@ -41,6 +41,13 @@ describe('Board', () => {
 
       assert(board.hasColumn('TODO'))
     })
+
+    it('can check if a column exists by id', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      board.addColumn(DOING_COLUMN_ID, 'Doing')
+
+      assert(!board.hasColumn(todoColumnId))
+    })
   })
 
   describe('hasCard', () => {
