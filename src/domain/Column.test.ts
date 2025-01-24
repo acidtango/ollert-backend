@@ -56,4 +56,13 @@ describe('Column', () => {
     column.addCard(card)
     assert.throws(() => column.addCard(card), new DuplicatedCardError(CardId.fromString(cardId)))
   })
+
+  it('can add two cards', () => {
+    const cardId = randomUUID()
+    const card1 = Card.create({ id: cardId, name: 'name' })
+    const card2 = Card.create({ id: cardId + '1', name: 'name' })
+
+    column.addCard(card1)
+    assert.doesNotThrow(() => column.addCard(card2))
+  })
 })

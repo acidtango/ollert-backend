@@ -26,6 +26,7 @@ export class BoardRepositoryFake extends BoardRepository {
   }
 
   async save(board: Board) {
+    console.log(board)
     this.boards.set(board.getId().getValue(), board)
     this.latestSavedBoard = board
   }

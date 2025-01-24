@@ -1,5 +1,5 @@
 import assert from 'node:assert'
-import { describe, it } from 'node:test'
+import { describe, it, mock } from 'node:test'
 import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
 import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
@@ -8,11 +8,13 @@ import { Board } from '../domain/Board.ts'
 import * as CardMother from '../../tests/CardIdMother.ts'
 
 describe('AddCardHandler', () => {
+  const eventBus = { emit: mock.fn() }
+
   it('should add a card', async () => {
     const board = new Board(WALLBOX_BOARD_ID)
     board.addColumn(TODO_COLUMN_ID, 'TODO')
     const boardRepository = new BoardRepositoryFake(board)
-    const handler = new AddCardHandler(boardRepository)
+    const handler = new AddCardHandler(eventBus, boardRepository)
 
     await handler.handle({
       type: 'AddCard',
@@ -30,7 +32,7 @@ describe('AddCardHandler', () => {
     const board = new Board(WALLBOX_BOARD_ID)
     board.addColumn(TODO_COLUMN_ID, 'TODO')
     const boardRepository = new BoardRepositoryFake(board)
-    const handler = new AddCardHandler(boardRepository)
+    const handler = new AddCardHandler(eventBus, boardRepository)
 
     await handler.handle({
       type: 'AddCard',

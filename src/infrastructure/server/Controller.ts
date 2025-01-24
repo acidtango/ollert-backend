@@ -25,6 +25,7 @@ export class Controller {
         return Promise.reject(new Error('Unknown command'))
       })
       .catch((e) => {
+        console.error(e)
         this.ws.send(JSON.stringify(e))
       })
   }

@@ -40,7 +40,7 @@ export class Column {
   }
 
   ensureCardIsNotDuplicated(card: Card): void {
-    if (this.cards.some((card) => card.hasSameId(card))) {
+    if (this.cards.some((c) => c.hasSameId(card))) {
       throw new DuplicatedCardError(card.getId())
     }
   }
