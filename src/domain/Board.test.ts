@@ -84,6 +84,13 @@ describe('Board', () => {
       assert(board.hasCard(cardName))
     })
 
+    it('throws an error if column does not exists', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const card = Card.create({ id: 'random', name: 'not important' })
+
+      assert.throws(() => board.addCard('not important', card))
+    })
+
     it('can add multiple a cards', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
       const cardName = 'Example card'

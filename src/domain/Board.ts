@@ -29,7 +29,12 @@ export class Board {
 
   addCard(columnId: string, card: Card) {
     const column = this.columns.find((c) => c.hasId(ColumnId.fromString(columnId)))
-    column?.addCard(card)
+
+    if (!column) {
+      throw new Error('Column not found')
+    }
+
+    column.addCard(card)
   }
 
   delete(columnId: ColumnId) {
