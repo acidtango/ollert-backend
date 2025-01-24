@@ -3,12 +3,12 @@ import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
 import { CardId } from './CardId.ts'
-import type { BoardEvent } from '../../types/types.ts'
+import type { BoardEvent, CardAdded } from '../../types/types.ts'
 
 export class Board {
   private readonly id: BoardId
   private columns: Array<Column> = []
-  private readonly domainEvents: Array<BoardEvent> = []
+  private domainEvents: Array<BoardEvent> = []
 
   constructor(id: string) {
     this.id = new BoardId(id)
@@ -48,6 +48,13 @@ export class Board {
     }
 
     column.addCard(card)
+    this.domainEvents.push({
+      type: 'CardAddedType',
+      cardId: card.getId().getValue(),
+      name: card.name.getValue(), // TODO: Name public??? 🚧
+      columnId,
+      boardId: this.id.getValue()
+    })
   }
 
   delete(columnId: ColumnId) {
@@ -60,5 +67,9 @@ export class Board {
 
   pullDomainEvents() {
     return this.domainEvents
+  }
+
+  flushDomainEvents() {
+    this.domainEvents = []
   }
 }

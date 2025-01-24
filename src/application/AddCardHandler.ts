@@ -25,6 +25,6 @@ export class AddCardHandler implements Handler {
     board.addCard(command.columnId, Card.create({ id: command.cardId, name: command.name }))
 
     await this.boardRepository.save(board)
-    this.eventBus.emit(board)
+    this.eventBus.emit(board.pullDomainEvents())
   }
 }

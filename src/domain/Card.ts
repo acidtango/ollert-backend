@@ -4,7 +4,7 @@ import { CardName } from './CardName.ts'
 
 export class Card {
   private id: CardId
-  private name: CardName
+  public name: CardName
   private description: CardDescription
 
   private constructor(values: { id: CardId; name: CardName; description: CardDescription }) {

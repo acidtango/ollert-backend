@@ -142,6 +142,8 @@ components:
         - type
         - name
         - boardId
+        - columnId
+        - cardId
       properties:
         type:
           $ref: '#/components/schemas/CardAddedType'
@@ -149,3 +151,7 @@ components:
           type: string
         boardId:
           $ref: '#/components/schemas/BoardId'
+        cardId:
+          $ref: '#/components/schemas/CardId'
+        columnId:
+          $ref: '#/components/schemas/ColumnId'
