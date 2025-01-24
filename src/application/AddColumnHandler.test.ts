@@ -15,7 +15,7 @@ describe('AddColumnHandler', () => {
 
     await handler.handle({
       type: 'AddColumn',
-      id: TODO_COLUMN_ID,
+      columnId: TODO_COLUMN_ID,
       name: 'TODO',
       boardId: WALLBOX_BOARD_ID
     })
@@ -31,7 +31,7 @@ describe('AddColumnHandler', () => {
 
     await handler.handle({
       type: 'AddColumn',
-      id: TODO_COLUMN_ID,
+      columnId: TODO_COLUMN_ID,
       name: 'TODO',
       boardId: WALLBOX_BOARD_ID
     })
@@ -47,7 +47,7 @@ describe('AddColumnHandler', () => {
 
     const command: AddColumn = {
       type: 'AddColumn',
-      id: TODO_COLUMN_ID,
+      columnId: TODO_COLUMN_ID,
       name: 'TODO',
       boardId: WALLBOX_BOARD_ID
     }
@@ -66,7 +66,7 @@ describe('AddColumnHandler', () => {
       () =>
         handler.handle({
           type: 'AddColumn',
-          id: TODO_COLUMN_ID,
+          columnId: TODO_COLUMN_ID,
           name: 'TODO',
           boardId: NOT_EXISTENT_BOARD_ID
         }),

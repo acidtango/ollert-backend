@@ -22,7 +22,7 @@ export class AddColumnHandler implements Handler {
     const boardId = new BoardId(command.boardId)
     const board = await this.boardRepository.findOrThrowBy(boardId)
 
-    board.addColumn(command.id, command.name)
+    board.addColumn(command.columnId, command.name)
 
     await this.boardRepository.save(board)
     this.eventBus.emit(board)

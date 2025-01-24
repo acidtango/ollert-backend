@@ -76,14 +76,14 @@ components:
       additionalProperties: false
       required:
         - type
-        - id
+        - columnId
         - name
         - boardId
       properties:
         type:
           $ref: '#/components/schemas/AddColumnType'
-        id:
-          type: string
+        columnId:
+          $ref: '#/components/schemas/ColumnId'
         name:
           type: string
         boardId:
