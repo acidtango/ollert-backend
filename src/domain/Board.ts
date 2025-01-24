@@ -37,9 +37,6 @@ export class Board {
   }
 
   hasCard(cardName: string) {
-    const column = this.columns[0]
-    if (!column) return false
-
-    return column.hasCard(cardName)
+    return this.columns.some((c) => c.hasCard(cardName))
   }
 }

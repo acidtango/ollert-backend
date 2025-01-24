@@ -99,7 +99,7 @@ describe('Board', () => {
     assert(!hasCard)
   })
 
-  it.skip('finds a card in any column', () => {
+  it('finds a card in any column', () => {
     const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
     const cardName = 'Example card'
     const card = Card.create({ id: 'random', name: cardName })
