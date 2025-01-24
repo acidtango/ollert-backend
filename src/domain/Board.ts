@@ -1,7 +1,7 @@
 import { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
-import type { ColumnId } from './ColumnId.ts'
+import { ColumnId } from './ColumnId.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -28,7 +28,7 @@ export class Board {
   }
 
   addCard(columnId: string, card: Card) {
-    const column = this.columns[0]
+    const column = this.columns.find((c) => c.hasId(ColumnId.fromString(columnId)))
     column?.addCard(card)
   }
 
@@ -40,6 +40,6 @@ export class Board {
     const column = this.columns[0]
     if (!column) return false
 
-    return !column.isEmpty()
+    return column.hasCard(cardName)
   }
 }

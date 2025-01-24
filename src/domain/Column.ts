@@ -43,4 +43,8 @@ export class Column {
       throw new DuplicatedCardError(card.getId())
     }
   }
+
+  hasCard(cardName: string) {
+    return this.cards.some((c) => c.hasName(cardName))
+  }
 }
