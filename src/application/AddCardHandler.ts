@@ -15,9 +15,8 @@ export class AddCardHandler implements Handler {
   async handle(command: AddCard) {
     const board = await this.boardRepository.findOrThrowBy(new BoardId(command.boardId))
 
-    board.addCard(command.columnId, Card.create({ id: 'xxxx', name: command.name }))
+    board.addCard(command.columnId, Card.create({ id: command.cardId, name: command.name }))
 
     await this.boardRepository.save(board)
-    console.log('handle create card', command)
   }
 }

@@ -2,6 +2,7 @@ import { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
+import { CardId } from './CardId.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -41,7 +42,7 @@ export class Board {
     this.columns = this.columns.filter((c) => !c.hasId(columnId))
   }
 
-  hasCard(cardName: string) {
+  hasCard(cardName: string | CardId) {
     return this.columns.some((c) => c.hasCard(cardName))
   }
 }

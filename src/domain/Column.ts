@@ -2,6 +2,7 @@ import type { Card } from './Card.ts'
 import { ColumnId } from './ColumnId.ts'
 import { ColumnName } from './ColumnName.ts'
 import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
+import { CardId } from './CardId.ts'
 
 export class Column {
   private id: ColumnId
@@ -44,7 +45,11 @@ export class Column {
     }
   }
 
-  hasCard(cardName: string) {
+  hasCard(cardName: string | CardId) {
+    if (cardName instanceof CardId) {
+      return this.cards.some((c) => c.hasId(cardName))
+    }
+
     return this.cards.some((c) => c.hasName(cardName))
   }
 }

@@ -8,4 +8,8 @@ export class CardId {
   getValue() {
     return this.cardId
   }
+
+  equals(id: CardId) {
+    return this.cardId === id.cardId
+  }
 }

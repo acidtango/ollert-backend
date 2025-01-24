@@ -3,6 +3,8 @@ import { describe, it } from 'node:test'
 import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
+import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { notExistentCardId } from '../../tests/CardIdMother.ts'
 
 describe('Board', () => {
   it('does not have column on creation', () => {
@@ -57,6 +59,16 @@ describe('Board', () => {
       const hasCard = board.hasCard('not existent')
 
       assert(!hasCard)
+    })
+
+    it('checks if has a card by id', () => {
+      const board = new Board(WALLBOX_BOARD_ID)
+      const cardName = 'Example card'
+      const card = Card.create({ id: 'random', name: cardName })
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addCard(TODO_COLUMN_ID, card)
+
+      assert(!board.hasCard(notExistentCardId))
     })
 
     it('finds a card in any column', () => {

@@ -44,4 +44,8 @@ export class Card {
   getId(): CardId {
     return this.id
   }
+
+  hasId(id: CardId) {
+    return this.id.equals(id)
+  }
 }

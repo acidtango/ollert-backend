@@ -8,9 +8,9 @@ export class BoardRepositoryFake extends BoardRepository {
 
   private latestSavedBoard?: Board
 
-  constructor() {
+  constructor(board: Board = new Board(WALLBOX_BOARD_ID)) {
     super()
-    this.boards.set(WALLBOX_BOARD_ID, new Board(WALLBOX_BOARD_ID))
+    this.boards.set(board.getId().toString(), board)
   }
 
   getLatestSaved(): Board {
