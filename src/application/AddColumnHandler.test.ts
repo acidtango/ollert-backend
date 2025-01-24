@@ -4,7 +4,7 @@ import { AddColumnHandler } from './AddColumnHandler.ts'
 import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
 import { NOT_EXISTENT_BOARD_ID, notExistentBoardId, WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { BoardNotFound } from '../domain/BoardNotFound.ts'
-import type { AddColumn } from '../../types/types.js'
+import type { AddColumn } from '../../types/types.ts'
 
 describe('AddColumnHandler', () => {
   it('should add a column', async () => {

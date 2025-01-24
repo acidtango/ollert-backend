@@ -14,7 +14,8 @@ describe('AddCardHandler', () => {
       type: 'AddCard',
       name: 'Test features',
       columnId: TODO_COLUMN_ID,
-      boardId: WALLBOX_BOARD_ID
+      boardId: WALLBOX_BOARD_ID,
+      cardId: '56ace536-3bf7-41b0-a809-679937eb3e09'
     })
 
     const board = boardRepository.getLatestSaved()

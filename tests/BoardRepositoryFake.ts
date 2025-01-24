@@ -10,7 +10,7 @@ export class BoardRepositoryFake extends BoardRepository {
 
   constructor() {
     super()
-    this.boards.set(WALLBOX_BOARD_ID, new Board(wallboxBoardId))
+    this.boards.set(WALLBOX_BOARD_ID, new Board(WALLBOX_BOARD_ID))
   }
 
   getLatestSaved(): Board {

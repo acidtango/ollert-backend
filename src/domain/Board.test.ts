@@ -13,45 +13,89 @@ describe('Board', () => {
     assert(isEmpty)
   })
 
-  it('can add columns', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+  describe('addColumn', () => {
+    it('can add columns', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
-    board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
+      board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
 
-    assert(!board.isEmpty())
+      assert(!board.isEmpty())
+    })
   })
 
-  it('can check if a column does not exists', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+  describe('hasColumn', () => {
+    it('can check if a column does not exists', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
-    const hasColumn = board.hasColumn('notExistent')
+      const hasColumn = board.hasColumn('notExistent')
 
-    assert(!hasColumn)
+      assert(!hasColumn)
+    })
+
+    it('can check if a column exists', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+
+      board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
+
+      assert(board.hasColumn('TODO'))
+    })
   })
 
-  it('can check if a column exists', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+  describe('hasCard', () => {
+    it('can not find any card in an empty board', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
-    board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
+      assert(!board.hasCard('NOT-EXISTANT'))
+    })
 
-    assert(board.hasColumn('TODO'))
+    it('checks if has a card by name', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const card = Card.create({ id: 'random', name: 'Example card' })
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addCard(TODO_COLUMN_ID, card)
+
+      const hasCard = board.hasCard('not existent')
+
+      assert(!hasCard)
+    })
+
+    it('finds a card in any column', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const cardName = 'Example card'
+      const card = Card.create({ id: 'random', name: cardName })
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addColumn(DOING_COLUMN_ID, 'DOING')
+
+      board.addCard(DOING_COLUMN_ID, card)
+
+      assert(board.hasCard(cardName))
+    })
   })
 
-  it('can not find any card in an empty board', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+  describe('addCard', () => {
+    it('can add a card', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const cardName = 'Example card'
+      const card = Card.create({ id: 'random', name: cardName })
 
-    assert(!board.hasCard('NOT-EXISTANT'))
-  })
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addCard(TODO_COLUMN_ID, card)
 
-  it('can add a card', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-    const cardName = 'Example card'
-    const card = Card.create({ id: 'random', name: cardName })
+      assert(board.hasCard(cardName))
+    })
 
-    board.addColumn(TODO_COLUMN_ID, 'TODO')
-    board.addCard(TODO_COLUMN_ID, card)
+    it('can add multiple a cards', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const cardName = 'Example card'
+      const card = Card.create({ id: 'random', name: cardName })
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addColumn(DOING_COLUMN_ID, 'DOING')
 
-    assert(board.hasCard(cardName))
+      board.addCard(DOING_COLUMN_ID, card)
+      board.delete(todoColumnId)
+
+      assert(board.hasCard(cardName))
+    })
   })
 
   describe('delete column', () => {
@@ -73,41 +117,5 @@ describe('Board', () => {
 
       assert(board.hasColumn('DOING'))
     })
-  })
-
-  it('can add multiple a cards', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-    const cardName = 'Example card'
-    const card = Card.create({ id: 'random', name: cardName })
-    board.addColumn(TODO_COLUMN_ID, 'TODO')
-    board.addColumn(DOING_COLUMN_ID, 'DOING')
-
-    board.addCard(DOING_COLUMN_ID, card)
-    board.delete(todoColumnId)
-
-    assert(board.hasCard(cardName))
-  })
-
-  it('checks if has a card by name', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-    const card = Card.create({ id: 'random', name: 'Example card' })
-    board.addColumn(TODO_COLUMN_ID, 'TODO')
-    board.addCard(TODO_COLUMN_ID, card)
-
-    const hasCard = board.hasCard('not existent')
-
-    assert(!hasCard)
-  })
-
-  it('finds a card in any column', () => {
-    const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-    const cardName = 'Example card'
-    const card = Card.create({ id: 'random', name: cardName })
-    board.addColumn(TODO_COLUMN_ID, 'TODO')
-    board.addColumn(DOING_COLUMN_ID, 'DOING')
-
-    board.addCard(DOING_COLUMN_ID, card)
-
-    assert(board.hasCard(cardName))
   })
 })
