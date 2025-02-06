@@ -9,17 +9,19 @@
   "scripts": {
     "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union",
     "generate-api": "sh api.sh",
+    "typecheck": "tsc",
     "format": "prettier --write src/**/*.ts",
-    "start:dev": "node --experimental-transform-types --disable-warning=ExperimentalWarning main.ts",
-    "test:unit": "node --experimental-transform-types --disable-warning=ExperimentalWarning --test",
-    "test": "node --experimental-transform-types --disable-warning=ExperimentalWarning --test src/**/*.test.ts",
-    "test:watch": "node --experimental-transform-types --disable-warning=ExperimentalWarning --watch --test src/**/*.test.ts"
+    "start:dev": "node main.ts",
+    "test:unit": "node --test",
+    "test": "node --test src/**/*.test.ts",
+    "test:watch": "node --watch --test src/**/*.test.ts"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
     "@types/ws": "^8.5.13",
     "prettier": "^3.4.2",
     "ts-to-zod": "^3.13.0",
+    "typescript": "^5.8.0-dev.20250206",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
   }
