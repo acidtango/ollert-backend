@@ -7,6 +7,7 @@ import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
 import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
+import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 
 describe('Column', () => {
   let column: Column
@@ -51,7 +52,7 @@ describe('Column', () => {
 
   it('cannot add the same card twice', () => {
     const cardId = randomUUID()
-    const card = Card.create({ id: cardId, name: 'name' })
+    const card = Card.create({ id: cardId, name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
 
     column.addCard(card.getId())
     assert.throws(() => column.addCard(card.getId()), new DuplicatedCardError(CardId.fromString(cardId)))
@@ -59,8 +60,8 @@ describe('Column', () => {
 
   it('can add two cards', () => {
     const cardId = randomUUID()
-    const card1 = Card.create({ id: cardId, name: 'name' })
-    const card2 = Card.create({ id: cardId + '1', name: 'name' })
+    const card1 = Card.create({ id: cardId, name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
+    const card2 = Card.create({ id: cardId + '1', name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
 
     column.addCard(card1.getId())
     assert.doesNotThrow(() => column.addCard(card2.getId()))

@@ -1,13 +1,13 @@
 import assert from 'node:assert'
-import { describe, it, mock, beforeEach } from 'node:test'
+import { beforeEach, describe, it, mock } from 'node:test'
 import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
-import { DOING_COLUMN_ID, TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
-import { AddCardHandler } from './AddCardHandler.ts'
-import { Board } from '../domain/Board.ts'
 import * as CardMother from '../../tests/CardIdMother.ts'
-import type { CardAdded, ColumnAdded } from '../../types/types.js'
+import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import type { CardAdded } from '../../types/types.js'
+import { Board } from '../domain/Board.ts'
 import { CardId } from '../domain/CardId.ts'
+import { AddCardHandler } from './AddCardHandler.ts'
 
 describe('AddCardHandler', () => {
   let eventBus = { emit: mock.fn() }
