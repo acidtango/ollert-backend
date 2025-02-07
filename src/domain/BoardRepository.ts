@@ -4,7 +4,7 @@ import { BoardNotFound } from './BoardNotFound.ts'
 
 export abstract class BoardRepository {
   protected abstract findBy(id: BoardId): Promise<Board | undefined>
-  abstract save(board: Board): Promise<void>
+  abstract save(board: Board): Promise<void> 
 
   async findOrThrowBy(id: BoardId): Promise<Board> {
     const board = await this.findBy(id)

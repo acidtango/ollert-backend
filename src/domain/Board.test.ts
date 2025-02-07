@@ -5,6 +5,7 @@ import { Board } from './Board.ts'
 import { Card } from './Card.ts'
 import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { notExistentCardId } from '../../tests/CardIdMother.ts'
+import { CardId } from './CardId.ts'
 
 describe('Board', () => {
   it('does not have column on creation', () => {
@@ -54,7 +55,7 @@ describe('Board', () => {
     it('can not find any card in an empty board', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
-      assert(!board.hasCard('NOT-EXISTANT'))
+      assert(!board.hasCard(CardId.fromString('NOT-EXISTANT')))
     })
 
     it('checks if has a card by name', () => {
@@ -63,7 +64,7 @@ describe('Board', () => {
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, card)
 
-      const hasCard = board.hasCard('not existent')
+      const hasCard = board.hasCard(CardId.fromString('NOT-EXISTANT'))
 
       assert(!hasCard)
     })
@@ -87,7 +88,7 @@ describe('Board', () => {
 
       board.addCard(DOING_COLUMN_ID, card)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
   })
 
@@ -100,7 +101,7 @@ describe('Board', () => {
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, card)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
 
     it('throws an error if column does not exists', () => {
@@ -120,7 +121,7 @@ describe('Board', () => {
       board.addCard(DOING_COLUMN_ID, card)
       board.delete(todoColumnId)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
   })
 

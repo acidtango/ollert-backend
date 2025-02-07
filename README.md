@@ -12,3 +12,23 @@ This project is API-first, meaning all the types frome from the `asyncapi.yml` f
 * [x] Lanzar eventos desde el agregado
 * [ ] Un mensaje que envíe el estado actual del board al cliente
 * [ ] Refactorizar el agregado a event sourcing
+
+
+Cual es el main aggregate?
+- Column
+- Card
+- Los dos
+
+
+
+Agregados:
+Board{
+    Columns: Column[]{
+     - columnId
+     - name: ColumnName
+     - Cards:CardId[]
+ }
+ }
+
+Card
+  - Info de card

@@ -44,7 +44,7 @@ describe('Column', () => {
   })
 
   it('can add cards', () => {
-    column.addCard(Card.create({ id: randomUUID(), name: 'name' }))
+    column.addCard(CardId.fromString(randomUUID()))
 
     assert.ok(!column.isEmpty())
   })
@@ -53,8 +53,8 @@ describe('Column', () => {
     const cardId = randomUUID()
     const card = Card.create({ id: cardId, name: 'name' })
 
-    column.addCard(card)
-    assert.throws(() => column.addCard(card), new DuplicatedCardError(CardId.fromString(cardId)))
+    column.addCard(card.getId())
+    assert.throws(() => column.addCard(card.getId()), new DuplicatedCardError(CardId.fromString(cardId)))
   })
 
   it('can add two cards', () => {
@@ -62,7 +62,7 @@ describe('Column', () => {
     const card1 = Card.create({ id: cardId, name: 'name' })
     const card2 = Card.create({ id: cardId + '1', name: 'name' })
 
-    column.addCard(card1)
-    assert.doesNotThrow(() => column.addCard(card2))
+    column.addCard(card1.getId())
+    assert.doesNotThrow(() => column.addCard(card2.getId()))
   })
 })

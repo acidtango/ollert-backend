@@ -1,11 +1,14 @@
+import type { BoardId } from './BoardId.ts'
 import { CardDescription } from './CardDescription.ts'
 import { CardId } from './CardId.ts'
 import { CardName } from './CardName.ts'
+import type { ColumnId } from './ColumnId.ts'
 
 export class Card {
   private id: CardId
   public name: CardName
   private description: CardDescription
+  private domainEvents: Array<any> = []
 
   private constructor(values: { id: CardId; name: CardName; description: CardDescription }) {
     this.id = values.id
@@ -13,7 +16,8 @@ export class Card {
     this.description = values.description
   }
 
-  static create(values: { id: string; name: string }): Card {
+  static create(values: { id: string; name: string; columnId: string; boardId: string }): Card {
+    //Add event
     return new Card({
       id: CardId.fromString(values.id),
       name: CardName.fromString(values.name),
@@ -47,5 +51,13 @@ export class Card {
 
   hasId(id: CardId) {
     return this.id.equals(id)
+  }
+
+  pullDomainEvents() {
+    return this.domainEvents
+  }
+
+  flushDomainEvents() {
+    this.domainEvents = []
   }
 }

@@ -7,6 +7,7 @@ import { AddCardHandler } from './AddCardHandler.ts'
 import { Board } from '../domain/Board.ts'
 import * as CardMother from '../../tests/CardIdMother.ts'
 import type { CardAdded, ColumnAdded } from '../../types/types.js'
+import { CardId } from '../domain/CardId.ts'
 
 describe('AddCardHandler', () => {
   let eventBus = { emit: mock.fn() }
@@ -30,7 +31,7 @@ describe('AddCardHandler', () => {
     })
 
     const savedBoard = boardRepository.getLatestSaved()
-    assert.ok(savedBoard.hasCard('Test features'))
+    assert.ok(savedBoard.hasCard(CardId.fromString(CardMother.REFACTOR_REFINERY.ID)))
   })
 
   it('cannot add a card with the same id', async () => {
