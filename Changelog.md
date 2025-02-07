@@ -71,3 +71,15 @@ Asistentes: Virén, Manu, Daute, Héctor, Diego, Jorge Daniel, Fer, Alexis, Dani
 * Hemos añadido cards a columnas
 * Nos hemos dado cuenta de que no tiene mucho sentido mandar comandos por el Websocket, excepto si son muchos y es entorno colaborativo 🤝🏽
 * Los IDs vienen del front 😎
+
+> Día 07/02/2025
+
+Driver: Edu
+Notas: Pana Edu
+Asistentes: Edu, Angel, Dani, Manu, Daniel Montesino, Jorge Daniel, Jose Orlando, Adrian Gonzalez, Alberto Mendoza, 
+José 
+Barrera, Manuel Guillermo, Santi.
+
+* Discutir sobre la obtención actual del board.
+* Implementar la obtención del board mediante http.
+* Activar "erasableSyntaxOnly" en el tsconfig.
