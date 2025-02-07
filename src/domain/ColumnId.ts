@@ -1,5 +1,9 @@
 export class ColumnId {
-  private constructor(private readonly columnId: string) {}
+  private readonly columnId: string
+
+  private constructor(columnId: string) {
+    this.columnId = columnId
+  }
 
   static fromString(columnId: string) {
     return new ColumnId(columnId)

@@ -1,7 +1,10 @@
 import { InvalidCardNameError } from './errors/InvalidCardNameError.ts'
 
 export class CardName {
-  private constructor(private readonly name: string) {
+  private readonly name: string
+
+  private constructor(name: string) {
+    this.name = name
     if (!name.trim()) throw new InvalidCardNameError(name)
   }
 
