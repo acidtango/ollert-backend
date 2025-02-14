@@ -1,7 +1,10 @@
 import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
 
 export class ColumnName {
-  private constructor(private readonly name: string) {
+  private readonly name: string
+
+  private constructor(name: string) {
+    this.name = name
     if (!name.trim()) throw new InvalidColumnNameError(name)
   }
 

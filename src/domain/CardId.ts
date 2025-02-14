@@ -1,5 +1,9 @@
 export class CardId {
-  private constructor(private readonly cardId: string) {}
+  private readonly cardId: string
+
+  private constructor(cardId: string) {
+    this.cardId = cardId
+  }
 
   static fromString(cardId: string) {
     return new CardId(cardId)

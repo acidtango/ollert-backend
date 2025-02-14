@@ -5,7 +5,7 @@ import { AddCardSchema } from '../../types/types.zod.ts'
 import { BoardId } from '../domain/BoardId.ts'
 import type { BoardRepository } from '../domain/BoardRepository.ts'
 import { Card } from '../domain/Card.ts'
-import type { EventBus } from '../domain/EventBus.js'
+import type { EventBus } from '../domain/EventBus.ts'
 import type { Handler } from './Handler.ts'
 
 export class AddCardHandler implements Handler {

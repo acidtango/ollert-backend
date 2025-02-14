@@ -5,10 +5,14 @@ import { BoardCommandSchema } from '../../../types/types.zod.ts'
 import type { Handler } from '../../application/Handler.ts'
 
 export class Controller {
-  constructor(
-    private readonly ws: WebSocket,
-    private readonly handlers: Handler[]
-  ) {}
+  private readonly ws: WebSocket
+
+  private readonly handlers: Handler[]
+
+  constructor(ws: WebSocket, handlers: Handler[]) {
+    this.handlers = handlers
+    this.ws = ws
+  }
 
   onMessage(data: Buffer) {
     Promise.resolve(data.toString())

@@ -2,7 +2,11 @@ import { WebSocketServer } from 'ws'
 import type { EventBus } from '../domain/EventBus.ts'
 
 export class EventBusWebSocket implements EventBus {
-  constructor(private readonly eventsServer: WebSocketServer) {}
+  private readonly eventsServer: WebSocketServer
+
+  constructor(eventsServer: WebSocketServer) {
+    this.eventsServer = eventsServer
+  }
 
   emit(event: any) {
     this.eventsServer.clients.forEach((client) => {

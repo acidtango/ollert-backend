@@ -12,6 +12,7 @@ This project is API-first, meaning all the types frome from the `asyncapi.yml` f
 * [x] Lanzar eventos desde el agregado
 * [ ] Un mensaje que envíe el estado actual del board al cliente
 * [ ] Refactorizar el agregado a event sourcing
+* [ ] Implementar tests e2e
 
 
 Cual es el main aggregate?
