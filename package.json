@@ -4,7 +4,7 @@
   "description": "The Heart-Counter manages popular messages in a Slack workspace by monitoring message reaction data. It also sends an acknowledgment message back to the Slack Server to indicate it has received the message.",
   "type": "module",
   "engines": {
-    "node": ">=14.15.1"
+    "node": ">=23.8.0"
   },
   "scripts": {
     "generate-models": "asyncapi generate models typescript asyncapi.yml -o types --tsExportType named --tsIncludeComments --tsModelType interface --tsRawPropertyNames --tsEnumType union",
