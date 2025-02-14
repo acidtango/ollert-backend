@@ -1,4 +1,4 @@
-import { CardId } from '../src/domain/CardId.ts'
+import { CardId } from '../src/task-management/domain/CardId.ts'
 
 export const REFACTOR_REFINERY_ID = '74a36d29-5faf-4561-a669-dec2e4024146'
 

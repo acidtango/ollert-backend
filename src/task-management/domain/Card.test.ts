@@ -3,8 +3,8 @@ import { randomUUID } from 'node:crypto'
 import { beforeEach, describe, it } from 'node:test'
 import { Card } from './Card.ts'
 import { InvalidCardNameError } from './errors/InvalidCardNameError.ts'
-import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { TODO_COLUMN_ID } from '../../../tests/ColumnIdMother.ts'
+import { WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
 
 describe('Card', () => {
   let card: Card

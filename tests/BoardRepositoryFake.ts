@@ -1,7 +1,7 @@
-import { Board } from '../src/domain/Board.ts'
-import { BoardId } from '../src/domain/BoardId.ts'
-import { BoardRepository } from '../src/domain/BoardRepository.ts'
-import { WALLBOX_BOARD_ID, wallboxBoardId } from './BoardIdMother.ts'
+import { Board } from '../src/task-management/domain/Board.ts'
+import { BoardId } from '../src/task-management/domain/BoardId.ts'
+import { BoardRepository } from '../src/task-management/domain/BoardRepository.ts'
+import { WALLBOX_BOARD_ID } from './BoardIdMother.ts'
 
 export class BoardRepositoryFake extends BoardRepository {
   private boards: Map<string, Board> = new Map()

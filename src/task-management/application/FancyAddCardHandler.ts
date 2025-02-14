@@ -1,5 +1,5 @@
-import type { AddCard } from '../../types/types.ts'
-import { AddCardSchema } from '../../types/types.zod.ts'
+import type { AddCard } from '../../../types/types.ts'
+import { AddCardSchema } from '../../../types/types.zod.ts'
 import { BoardId } from '../domain/BoardId.ts'
 import type { BoardRepository } from '../domain/BoardRepository.ts'
 import type { Handler } from './Handler.ts'

@@ -1,7 +1,7 @@
 import { type WebSocket } from 'ws'
-import { StringToJSONSchema } from '../../../schema.ts'
-import type { BoardCommand } from '../../../types/types.ts'
-import { BoardCommandSchema } from '../../../types/types.zod.ts'
+import { StringToJSONSchema } from '../../../../schema.ts'
+import type { BoardCommand } from '../../../../types/types.ts'
+import { BoardCommandSchema } from '../../../../types/types.zod.ts'
 import type { Handler } from '../../application/Handler.ts'
 
 export class Controller {

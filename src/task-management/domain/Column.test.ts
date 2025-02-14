@@ -1,13 +1,13 @@
 import assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
 import { beforeEach, describe, it } from 'node:test'
-import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import { TODO_COLUMN_ID } from '../../../tests/ColumnIdMother.ts'
 import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
 import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
 
 describe('Column', () => {
   let column: Column

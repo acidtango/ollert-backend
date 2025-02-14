@@ -1,9 +1,7 @@
-import { Board } from '../src/domain/Board.ts'
-import { BoardId } from '../src/domain/BoardId.ts'
-import { BoardRepository } from '../src/domain/BoardRepository.ts'
-import { Card } from '../src/domain/Card.ts'
-import { CardRepository } from '../src/domain/CardRepository.ts'
-import { WALLBOX_BOARD_ID, wallboxBoardId } from './BoardIdMother.ts'
+import { Board } from '../src/task-management/domain/Board.ts'
+import { Card } from '../src/task-management/domain/Card.ts'
+import { CardRepository } from '../src/task-management/domain/CardRepository.ts'
+import { wallboxBoardId } from './BoardIdMother.ts'
 import { REFACTOR_REFINERY } from './CardIdMother.ts'
 
 export class CardRepositoryFake extends CardRepository {

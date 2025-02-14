@@ -1,11 +1,11 @@
 import { describe, it, mock } from 'node:test'
 import assert from 'node:assert'
 import { AddColumnHandler } from './AddColumnHandler.ts'
-import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
-import { NOT_EXISTENT_BOARD_ID, notExistentBoardId, WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { BoardRepositoryFake } from '../../../tests/BoardRepositoryFake.ts'
+import { NOT_EXISTENT_BOARD_ID, notExistentBoardId, WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
 import { BoardNotFound } from '../domain/BoardNotFound.ts'
-import type { AddColumn, ColumnAdded, ColumnAddedType } from '../../types/types.ts'
-import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
+import type { ColumnAdded } from '../../../types/types.ts'
+import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../../tests/ColumnIdMother.ts'
 
 describe('AddColumnHandler', () => {
   it('should add a column', async () => {

@@ -3,7 +3,7 @@ import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
 import { CardId } from './CardId.ts'
-import type { BoardEvent, CardAdded } from '../../types/types.ts'
+import type { BoardEvent } from '../../../types/types.ts'
 import { ColumnNotFoundError } from './errors/ColumnNotFoundError.ts'
 
 export class Board {
