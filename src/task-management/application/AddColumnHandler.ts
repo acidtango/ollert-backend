@@ -1,5 +1,5 @@
-import type { AddColumn } from '../../types/types.ts'
-import { AddColumnSchema } from '../../types/types.zod.ts'
+import type { AddColumn } from '../../../types/types.ts'
+import { AddColumnSchema } from '../../../types/types.zod.ts'
 import type { EventBus } from '../domain/EventBus.ts'
 import type { Handler } from './Handler.ts'
 import { BoardId } from '../domain/BoardId.ts'

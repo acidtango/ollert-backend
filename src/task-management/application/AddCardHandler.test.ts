@@ -1,12 +1,13 @@
 import assert from 'node:assert'
 import { beforeEach, describe, it, mock } from 'node:test'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
-import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
-import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
-import { AddCardHandler } from './AddCardHandler.ts'
+import { WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
+import { BoardRepositoryFake } from '../../../tests/BoardRepositoryFake.ts'
+import * as CardMother from '../../../tests/CardIdMother.ts'
+import { TODO_COLUMN_ID } from '../../../tests/ColumnIdMother.ts'
+import type { CardAdded } from '../../../types/types.ts'
 import { Board } from '../domain/Board.ts'
-import * as CardMother from '../../tests/CardIdMother.ts'
-import type { CardAdded } from '../../types/types.ts'
+import { CardId } from '../domain/CardId.ts'
+import { AddCardHandler } from './AddCardHandler.ts'
 
 describe('AddCardHandler', () => {
   let eventBus = { emit: mock.fn() }
@@ -30,7 +31,7 @@ describe('AddCardHandler', () => {
     })
 
     const savedBoard = boardRepository.getLatestSaved()
-    assert.ok(savedBoard.hasCard('Test features'))
+    assert.ok(savedBoard.hasCard(CardId.fromString(CardMother.REFACTOR_REFINERY.ID)))
   })
 
   it('cannot add a card with the same id', async () => {

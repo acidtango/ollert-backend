@@ -3,7 +3,8 @@ import type { Card } from './Card.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
 import { CardId } from './CardId.ts'
-import type { BoardEvent, CardAdded } from '../../types/types.ts'
+import type { BoardEvent } from '../../../types/types.ts'
+import { ColumnNotFoundError } from './errors/ColumnNotFoundError.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -47,7 +48,7 @@ export class Board {
       throw new Error('Column not found')
     }
 
-    column.addCard(card)
+    column.addCard(card.getId())
     this.domainEvents.push({
       type: 'CardAddedType',
       cardId: card.getId().getValue(),
@@ -61,7 +62,7 @@ export class Board {
     this.columns = this.columns.filter((c) => !c.hasId(columnId))
   }
 
-  hasCard(cardName: string | CardId) {
+  hasCard(cardName: CardId) {
     return this.columns.some((c) => c.hasCard(cardName))
   }
 
@@ -71,5 +72,11 @@ export class Board {
 
   flushDomainEvents() {
     this.domainEvents = []
+  }
+
+  ensureColumnExists(columnId: ColumnId) {
+    if (!this.hasColumn(columnId)) {
+      throw new ColumnNotFoundError(columnId, this.id)
+    }
   }
 }

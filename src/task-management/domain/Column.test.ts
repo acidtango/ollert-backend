@@ -1,12 +1,13 @@
 import assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
 import { beforeEach, describe, it } from 'node:test'
-import { TODO_COLUMN_ID } from '../../tests/ColumnIdMother.ts'
+import { TODO_COLUMN_ID } from '../../../tests/ColumnIdMother.ts'
 import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { DuplicatedCardError } from './errors/DuplicatedCardError.ts'
 import { InvalidColumnNameError } from './errors/InvalidColumnNameError.ts'
+import { WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
 
 describe('Column', () => {
   let column: Column
@@ -44,25 +45,25 @@ describe('Column', () => {
   })
 
   it('can add cards', () => {
-    column.addCard(Card.create({ id: randomUUID(), name: 'name' }))
+    column.addCard(CardId.fromString(randomUUID()))
 
     assert.ok(!column.isEmpty())
   })
 
   it('cannot add the same card twice', () => {
     const cardId = randomUUID()
-    const card = Card.create({ id: cardId, name: 'name' })
+    const card = Card.create({ id: cardId, name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
 
-    column.addCard(card)
-    assert.throws(() => column.addCard(card), new DuplicatedCardError(CardId.fromString(cardId)))
+    column.addCard(card.getId())
+    assert.throws(() => column.addCard(card.getId()), new DuplicatedCardError(CardId.fromString(cardId)))
   })
 
   it('can add two cards', () => {
     const cardId = randomUUID()
-    const card1 = Card.create({ id: cardId, name: 'name' })
-    const card2 = Card.create({ id: cardId + '1', name: 'name' })
+    const card1 = Card.create({ id: cardId, name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
+    const card2 = Card.create({ id: cardId + '1', name: 'name', columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
 
-    column.addCard(card1)
-    assert.doesNotThrow(() => column.addCard(card2))
+    column.addCard(card1.getId())
+    assert.doesNotThrow(() => column.addCard(card2.getId()))
   })
 })

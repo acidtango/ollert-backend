@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
+import { WALLBOX_BOARD_ID } from '../../../tests/BoardIdMother.ts'
+import { notExistentCardId } from '../../../tests/CardIdMother.ts'
+import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
-import { notExistentCardId } from '../../tests/CardIdMother.ts'
+import { CardId } from './CardId.ts'
 
 describe('Board', () => {
   it('does not have column on creation', () => {
@@ -54,16 +55,21 @@ describe('Board', () => {
     it('can not find any card in an empty board', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
-      assert(!board.hasCard('NOT-EXISTANT'))
+      assert(!board.hasCard(CardId.fromString('NOT-EXISTANT')))
     })
 
     it('checks if has a card by name', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-      const card = Card.create({ id: 'random', name: 'Example card' })
+      const card = Card.create({
+        id: 'random',
+        name: 'Example card',
+        columnId: TODO_COLUMN_ID,
+        boardId: WALLBOX_BOARD_ID
+      })
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, card)
 
-      const hasCard = board.hasCard('not existent')
+      const hasCard = board.hasCard(CardId.fromString('NOT-EXISTANT'))
 
       assert(!hasCard)
     })
@@ -71,7 +77,7 @@ describe('Board', () => {
     it('checks if has a card by id', () => {
       const board = new Board(WALLBOX_BOARD_ID)
       const cardName = 'Example card'
-      const card = Card.create({ id: 'random', name: cardName })
+      const card = Card.create({ id: 'random', name: cardName, columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, card)
 
@@ -81,13 +87,13 @@ describe('Board', () => {
     it('finds a card in any column', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
       const cardName = 'Example card'
-      const card = Card.create({ id: 'random', name: cardName })
+      const card = Card.create({ id: 'random', name: cardName, columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addColumn(DOING_COLUMN_ID, 'DOING')
 
       board.addCard(DOING_COLUMN_ID, card)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
   })
 
@@ -95,17 +101,22 @@ describe('Board', () => {
     it('can add a card', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
       const cardName = 'Example card'
-      const card = Card.create({ id: 'random', name: cardName })
+      const card = Card.create({ id: 'random', name: cardName, columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
 
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, card)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
 
     it('throws an error if column does not exists', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
-      const card = Card.create({ id: 'random', name: 'not important' })
+      const card = Card.create({
+        id: 'random',
+        name: 'not important',
+        columnId: TODO_COLUMN_ID,
+        boardId: WALLBOX_BOARD_ID
+      })
 
       assert.throws(() => board.addCard('not important', card))
     })
@@ -113,14 +124,14 @@ describe('Board', () => {
     it('can add multiple a cards', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
       const cardName = 'Example card'
-      const card = Card.create({ id: 'random', name: cardName })
+      const card = Card.create({ id: 'random', name: cardName, columnId: TODO_COLUMN_ID, boardId: WALLBOX_BOARD_ID })
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addColumn(DOING_COLUMN_ID, 'DOING')
 
       board.addCard(DOING_COLUMN_ID, card)
       board.delete(todoColumnId)
 
-      assert(board.hasCard(cardName))
+      assert(board.hasCard(card.getId()))
     })
   })
 

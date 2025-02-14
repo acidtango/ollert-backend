@@ -1,4 +1,4 @@
-import { BoardId } from '../src/domain/BoardId.ts'
+import { BoardId } from '../src/task-management/domain/BoardId.ts'
 
 export const WALLBOX_BOARD_ID = 'abfe40bf-22b8-4692-8585-cea01b809493'
 

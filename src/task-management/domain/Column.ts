@@ -7,7 +7,7 @@ import { CardId } from './CardId.ts'
 export class Column {
   private id: ColumnId
   private name: ColumnName
-  private cards: Card[] = []
+  private cards: CardId[] = []
 
   private constructor(id: string, name: string) {
     this.id = ColumnId.fromString(id)
@@ -34,22 +34,20 @@ export class Column {
     return this.cards.length === 0
   }
 
-  addCard(card: Card): void {
-    this.ensureCardIsNotDuplicated(card)
-    this.cards.push(card)
+  addCard(cardId: CardId): void {
+    this.ensureCardIsNotDuplicated(cardId)
+    this.cards.push(cardId)
   }
 
-  ensureCardIsNotDuplicated(card: Card): void {
-    if (this.cards.some((c) => c.hasSameId(card))) {
-      throw new DuplicatedCardError(card.getId())
+  ensureCardIsNotDuplicated(card: CardId): void {
+    if (this.cards.some((c) => c.equals(card))) {
+      throw new DuplicatedCardError(card)
     }
   }
 
-  hasCard(cardName: string | CardId) {
+  hasCard(cardName: CardId) {
     if (cardName instanceof CardId) {
-      return this.cards.some((c) => c.hasId(cardName))
+      return this.cards.some((c) => c.equals(cardName))
     }
-
-    return this.cards.some((c) => c.hasName(cardName))
   }
 }
