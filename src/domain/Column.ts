@@ -7,7 +7,7 @@ import { CardId } from './CardId.ts'
 export class Column {
   private id: ColumnId
   private name: ColumnName
-  private cards: CardId[] = []     
+  private cards: CardId[] = []
 
   private constructor(id: string, name: string) {
     this.id = ColumnId.fromString(id)
@@ -45,7 +45,7 @@ export class Column {
     }
   }
 
-  hasCard(cardName:  CardId) {
+  hasCard(cardName: CardId) {
     if (cardName instanceof CardId) {
       return this.cards.some((c) => c.equals(cardName))
     }

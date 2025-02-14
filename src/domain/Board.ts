@@ -76,7 +76,7 @@ export class Board {
 
   ensureColumnExists(columnId: ColumnId) {
     if (!this.hasColumn(columnId)) {
-      throw new ColumnNotFoundError(columnId,this.id)
+      throw new ColumnNotFoundError(columnId, this.id)
     }
   }
 }

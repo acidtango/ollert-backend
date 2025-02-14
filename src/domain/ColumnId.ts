@@ -6,7 +6,7 @@ export class ColumnId {
   }
 
   static fromString(columnId: string) {
-    return new ColumnId(columnId)   
+    return new ColumnId(columnId)
   }
 
   equals(otherId: ColumnId) {
