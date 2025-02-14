@@ -3,10 +3,14 @@ import type internal from 'stream'
 import { WebSocketServer } from 'ws'
 
 export class Router {
-  constructor(
-    private readonly commandsServer: WebSocketServer,
-    private readonly eventsServer: WebSocketServer
-  ) {}
+  private readonly commandsServer: WebSocketServer
+
+  private readonly eventsServer: WebSocketServer
+
+  constructor(commandsServer: WebSocketServer, eventsServer: WebSocketServer) {
+    this.eventsServer = eventsServer
+    this.commandsServer = commandsServer
+  }
 
   onUpgrade(request: IncomingMessage, socket: internal.Duplex, head: Buffer) {
     const { pathname } = new URL(request.url ?? '', 'http://localhost:3000')
