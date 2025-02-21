@@ -18,7 +18,7 @@ describe('AddCardHandler', () => {
   it('should add a card', async () => {
     const board = new Board(WALLBOX_BOARD_ID)
     board.addColumn(TODO_COLUMN_ID, 'TODO')
-    const boardRepository = new BoardRepositoryFake(board)
+    const boardRepository = new BoardRepositoryFake([board])
     const handler = new AddCardHandler(eventBus, boardRepository)
 
     await handler.handle({
@@ -36,7 +36,7 @@ describe('AddCardHandler', () => {
   it('cannot add a card with the same id', async () => {
     const board = new Board(WALLBOX_BOARD_ID)
     board.addColumn(TODO_COLUMN_ID, 'TODO')
-    const boardRepository = new BoardRepositoryFake(board)
+    const boardRepository = new BoardRepositoryFake([board])
     const handler = new AddCardHandler(eventBus, boardRepository)
 
     await handler.handle({
@@ -55,7 +55,7 @@ describe('AddCardHandler', () => {
     const board = new Board(WALLBOX_BOARD_ID)
     board.addColumn(TODO_COLUMN_ID, 'TODO')
     board.flushDomainEvents()
-    const boardRepository = new BoardRepositoryFake(board)
+    const boardRepository = new BoardRepositoryFake([board])
     const handler = new AddCardHandler(eventBus, boardRepository)
 
     await handler.handle({

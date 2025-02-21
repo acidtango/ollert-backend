@@ -1,8 +1,8 @@
 export const ErrorCode = {
-  BOARD_NOT_FOUND : 'BOARD_NOT_FOUND',
-  INVALID_COLUMN_NAME : 'INVALID_COLUMN_NAME',
-  INVALID_CARD_NAME : 'INVALID_CARD_NAME',
-  DUPLICATED_CARD_ERROR : 'DUPLICATED_CARD_ERROR'
-} as const;
+  BOARD_NOT_FOUND: 'BOARD_NOT_FOUND',
+  INVALID_COLUMN_NAME: 'INVALID_COLUMN_NAME',
+  INVALID_CARD_NAME: 'INVALID_CARD_NAME',
+  DUPLICATED_CARD_ERROR: 'DUPLICATED_CARD_ERROR'
+} as const
 
-export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
+export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode]

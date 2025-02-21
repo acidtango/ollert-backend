@@ -36,6 +36,12 @@ export class Board {
     })
   }
 
+  removeCard(primitiveCardId: string) {
+    const cardId = CardId.fromString(primitiveCardId)
+    const cardColumn = this.columns.find((column) => column.hasCard(cardId))
+    cardColumn?.removeCard(cardId)
+  }
+
   isEmpty() {
     return this.columns.length === 0
   }

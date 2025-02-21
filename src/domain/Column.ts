@@ -52,4 +52,8 @@ export class Column {
 
     return this.cards.some((c) => c.hasName(cardName))
   }
+
+  removeCard(cardId: CardId) {
+    this.cards = this.cards.filter((card) => !card.hasId(cardId))
+  }
 }
