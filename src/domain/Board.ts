@@ -34,10 +34,7 @@ export class Board {
       boardId: this.id.getValue()
     } satisfies ColumnAdded
 
-    //MUTATE
-    this.handleColumnAdded(columnAdded)
-    //ADD CHANGE
-    this.domainEvents.push(columnAdded)
+    this.handle(columnAdded)
   }
 
   removeCard(primitiveCardId: string) {
@@ -65,8 +62,7 @@ export class Board {
       boardId: this.id.getValue()
     } satisfies CardAdded
 
-    this.handleCardAdded(cardAdded)
-    this.domainEvents.push(cardAdded)
+    this.handle(cardAdded)
   }
 
   removeColumn(columnId: ColumnId) {
@@ -85,11 +81,11 @@ export class Board {
     this.domainEvents = []
   }
 
-  handleColumnAdded(columnAdded: ColumnAdded) {
+  private handleColumnAdded(columnAdded: ColumnAdded) {
     this.columns.push(Column.createNew(columnAdded.columnId, columnAdded.name))
   }
 
-  handleCardAdded(cardAdded: CardAdded) {
+  private handleCardAdded(cardAdded: CardAdded) {
     const column = this.columns.find((c) => c.hasId(ColumnId.fromString(cardAdded.columnId)))
 
     if (!column) {
@@ -98,5 +94,17 @@ export class Board {
     const card: Card = Card.create({ id: cardAdded.cardId, name: cardAdded.name })
 
     column.addCard(card)
+  }
+
+  private handle(boardEvent: BoardEvent) {
+    switch (boardEvent.type) {
+      case 'ColumnAdded':
+        this.handleColumnAdded(boardEvent as ColumnAdded)
+        break
+      case 'CardAdded':
+        this.handleCardAdded(boardEvent as CardAdded)
+        break
+    }
+    this.domainEvents.push(boardEvent)
   }
 }
