@@ -1,6 +1,6 @@
-import type { BoardEvent } from '../../types/types.ts'
+import type { BoardEvent, CardAdded, ColumnAdded } from '../../types/types.ts'
 import { BoardId } from './BoardId.ts'
-import type { Card } from './Card.ts'
+import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
@@ -27,13 +27,17 @@ export class Board {
   }
 
   addColumn(columnId: string, name: string) {
-    this.columns.push(Column.createNew(columnId, name))
-    this.domainEvents.push({
+    const columnAdded = {
       type: 'ColumnAdded',
       columnId,
       name,
       boardId: this.id.getValue()
-    })
+    } satisfies ColumnAdded
+
+    //MUTATE
+    this.handleColumnAdded(columnAdded)
+    //ADD CHANGE
+    this.domainEvents.push(columnAdded)
   }
 
   removeCard(primitiveCardId: string) {
@@ -53,20 +57,16 @@ export class Board {
   }
 
   addCard(columnId: string, card: Card) {
-    const column = this.columns.find((c) => c.hasId(ColumnId.fromString(columnId)))
-
-    if (!column) {
-      throw new Error('Column not found')
-    }
-
-    column.addCard(card)
-    this.domainEvents.push({
+    const cardAdded = {
       type: 'CardAdded',
       cardId: card.getId().getValue(),
       name: card.name.getValue(), // TODO: Name public??? 🚧
       columnId,
       boardId: this.id.getValue()
-    })
+    } satisfies CardAdded
+
+    this.handleCardAdded(cardAdded)
+    this.domainEvents.push(cardAdded)
   }
 
   removeColumn(columnId: ColumnId) {
@@ -83,5 +83,20 @@ export class Board {
 
   flushDomainEvents() {
     this.domainEvents = []
+  }
+
+  handleColumnAdded(columnAdded: ColumnAdded) {
+    this.columns.push(Column.createNew(columnAdded.columnId, columnAdded.name))
+  }
+
+  handleCardAdded(cardAdded: CardAdded) {
+    const column = this.columns.find((c) => c.hasId(ColumnId.fromString(cardAdded.columnId)))
+
+    if (!column) {
+      throw new Error('Column not found')
+    }
+    const card: Card = Card.create({ id: cardAdded.cardId, name: cardAdded.name })
+
+    column.addCard(card)
   }
 }
