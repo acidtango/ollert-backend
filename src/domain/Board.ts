@@ -69,7 +69,7 @@ export class Board {
     })
   }
 
-  delete(columnId: ColumnId) {
+  removeColumn(columnId: ColumnId) {
     this.columns = this.columns.filter((c) => !c.hasId(columnId))
   }
 

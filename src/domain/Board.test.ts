@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
+import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
+import { notExistentCardId } from '../../tests/CardIdMother.ts'
 import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
-import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
-import { notExistentCardId } from '../../tests/CardIdMother.ts'
 
 describe('Board', () => {
   it('does not have column on creation', () => {
@@ -118,7 +118,7 @@ describe('Board', () => {
       board.addColumn(DOING_COLUMN_ID, 'DOING')
 
       board.addCard(DOING_COLUMN_ID, card)
-      board.delete(todoColumnId)
+      board.removeColumn(todoColumnId)
 
       assert(board.hasCard(cardName))
     })
@@ -129,7 +129,7 @@ describe('Board', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
       board.addColumn(TODO_COLUMN_ID, 'TODO')
 
-      board.delete(todoColumnId)
+      board.removeColumn(todoColumnId)
 
       assert(board.isEmpty())
     })
@@ -139,7 +139,7 @@ describe('Board', () => {
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addColumn(DOING_COLUMN_ID, 'DOING')
 
-      board.delete(todoColumnId)
+      board.removeColumn(todoColumnId)
 
       assert(board.hasColumn('DOING'))
     })
