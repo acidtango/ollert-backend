@@ -7,11 +7,11 @@ import { IMPLEMENT_HOUSE_FINDER_ID, implementHouseFinderId } from '../../tests/C
 import assert from 'node:assert'
 
 describe('Remove card handler', () => {
-  it('remove a card from a board', () => {
+  it('remove a card from a board', async () => {
     const boardRepository = new BoardRepositoryFake([libeenBoard()])
     const handler = new RemoveCardHandler(boardRepository)
 
-    handler.handle({ cardId: IMPLEMENT_HOUSE_FINDER_ID, boardId: LIBEEN_BOARD_ID })
+    await handler.handle({ cardId: IMPLEMENT_HOUSE_FINDER_ID, boardId: LIBEEN_BOARD_ID })
 
     const lastSaved = boardRepository.getLatestSaved()
     assert.ok(!lastSaved.hasCard(implementHouseFinderId))
