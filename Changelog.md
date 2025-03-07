@@ -66,20 +66,62 @@ Driver: Dani
 Notas: Dani
 Asistentes: Virén, Manu, Daute, Héctor, Diego, Jorge Daniel, Fer, Alexis, Daniel Montesino, Santiago, José Barrera, Alberto Mendoza, Carlos Castellano, Alberto Gonzalez, Eduardo
 
-* Empezar a emitir eventos de dominio
-* Hemos testaedo la aplicación arrancándola!
-* Hemos añadido cards a columnas
-* Nos hemos dado cuenta de que no tiene mucho sentido mandar comandos por el Websocket, excepto si son muchos y es entorno colaborativo 🤝🏽
-* Los IDs vienen del front 😎
+- Empezar a emitir eventos de dominio
+- Hemos testaedo la aplicación arrancándola!
+- Hemos añadido cards a columnas
+- Nos hemos dado cuenta de que no tiene mucho sentido mandar comandos por el Websocket, excepto si son muchos y es entorno colaborativo 🤝🏽
+- Los IDs vienen del front 😎
 
 > Día 07/02/2025
 
 Driver: Edu
 Notas: Pana Edu
-Asistentes: Edu, Angel, Dani, Manu, Daniel Montesino, Jorge Daniel, Jose Orlando, Adrian Gonzalez, Alberto Mendoza, 
-José 
+Asistentes: Edu, Angel, Dani, Manu, Daniel Montesino, Jorge Daniel, Jose Orlando, Adrian Gonzalez, Alberto Mendoza,
+José
 Barrera, Manuel Guillermo, Santi.
 
-* Discutir sobre la obtención actual del board.
-* Implementar la obtención del board mediante http.
-* Activar "erasableSyntaxOnly" en el tsconfig.
+- Discutir sobre la obtención actual del board.
+- Implementar la obtención del board mediante http.
+- Activar "erasableSyntaxOnly" en el tsconfig.
+
+> Día 7/03/2025
+> Driver: Héctor
+> Notas: Héctor
+> Asistentes: Abel, Alberto González, Adrián González, Alberto Mendoza, Alexis, Carlos Castellano, Daniel Montesino, Diego Machín, José Barrera, Orlando, Manuel Carrera, Viren, Dani Ramos, Jorge Daniel, Fer, Edu
+
+- Terminamos la implementación del removido de la tarjeta
+- Empezamos la implementación de Event sourcing, pasando todo a una implementación de reconstrucción y mutación por eventos
+
+Próximos pasos:
+
+- Terminar la implementación al resto de capas de ES (El repo por ejemplo solo guarda y devuelve domain Events)
+- Sistemas de snapshot si queremos trastear con el
+- Varios refactors sobre la firma de los métodos (comentados con TODO)
+- Decidir que hacer sobre el test skippeado
+- Ir a prod 🚀
+
+Dudas:
+Tenemos que poner satisfies aqui?
+
+```
+const cardAdded = {
+      type: 'CardAdded',
+      cardId: card.getId().getValue(),
+      name: card.name.getValue(), // TODO: Name public??? 🚧
+      columnId,
+      boardId: this.id.getValue()
+    } satisfies CardAdded
+```
+
+en vez de:
+
+```
+const cardAdded: CardAdded = {
+      type: 'CardAdded',
+      cardId: card.getId().getValue(),
+      name: card.name.getValue(), // TODO: Name public??? 🚧
+      columnId,
+      boardId: this.id.getValue()
+    }
+```
+Cual es la diferencia?

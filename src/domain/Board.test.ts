@@ -152,8 +152,9 @@ describe('Board', () => {
       board.addColumn(TODO_COLUMN_ID, 'TODO')
       board.addCard(TODO_COLUMN_ID, Card.create({ id: REFACTOR_REFINERY_ID, name: 'Refactor refinery' }))
 
-      const reconstructedBoard = Board.reconstructFrom(board.getId().getValue(), board.pullDomainEvents())
-      assert.equal(reconstructedBoard, board)
+      const reconstructedBoard = Board.reconstructFrom(WALLBOX_BOARD_ID, board.pullDomainEvents())
+
+      assert.deepStrictEqual(reconstructedBoard, board)
     })
   })
 })

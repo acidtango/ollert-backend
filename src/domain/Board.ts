@@ -118,6 +118,8 @@ export class Board {
 
   //TODO: the creation of the board should be an event itself so boardId is not needed
   public static reconstructFrom(boardId: string, events: Array<BoardEvent>) {
-    
+    const board = new Board(boardId)
+    events.forEach((event) => board.handle(event))
+    return board
   }
 }
