@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import { WALLBOX_BOARD_ID } from '../../tests/BoardIdMother.ts'
-import { notExistentCardId } from '../../tests/CardIdMother.ts'
+import { notExistentCardId, REFACTOR_REFINERY_ID } from '../../tests/CardIdMother.ts'
 import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
@@ -142,6 +142,18 @@ describe('Board', () => {
       board.removeColumn(todoColumnId)
 
       assert(board.hasColumn('DOING'))
+    })
+  })
+
+  describe('reconstructFrom', () => {
+    it('correctly reconstructs when various events are applied', () => {
+      const board = new Board(WALLBOX_BOARD_ID)
+
+      board.addColumn(TODO_COLUMN_ID, 'TODO')
+      board.addCard(TODO_COLUMN_ID, Card.create({ id: REFACTOR_REFINERY_ID, name: 'Refactor refinery' }))
+
+      const reconstructedBoard = Board.reconstructFrom(board.getId().getValue(), board.pullDomainEvents())
+      assert.equal(reconstructedBoard, board)
     })
   })
 })

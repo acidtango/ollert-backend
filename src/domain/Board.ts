@@ -51,6 +51,7 @@ export class Board {
     return this.columns.length === 0
   }
 
+  //TODO: Decide wether or not we should receive the card here or just the params
   addCard(columnId: string, card: Card) {
     const cardAdded = {
       type: 'CardAdded',
@@ -113,5 +114,10 @@ export class Board {
         break
     }
     this.domainEvents.push(boardEvent)
+  }
+
+  //TODO: the creation of the board should be an event itself so boardId is not needed
+  public static reconstructFrom(boardId: string, events: Array<BoardEvent>) {
+    
   }
 }
