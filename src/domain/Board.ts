@@ -1,9 +1,9 @@
+import type { BoardEvent } from '../../types/types.ts'
 import { BoardId } from './BoardId.ts'
 import type { Card } from './Card.ts'
+import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
-import { CardId } from './CardId.ts'
-import type { BoardEvent, CardAdded } from '../../types/types.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -40,6 +40,12 @@ export class Board {
     const cardId = CardId.fromString(primitiveCardId)
     const cardColumn = this.columns.find((column) => column.hasCard(cardId))
     cardColumn?.removeCard(cardId)
+
+    this.domainEvents.push({
+      type: 'CardRemoved',
+      cardId: cardId.getValue(),
+      boardId: this.id.getValue()
+    })
   }
 
   isEmpty() {
@@ -55,7 +61,7 @@ export class Board {
 
     column.addCard(card)
     this.domainEvents.push({
-      type: 'CardAddedType',
+      type: 'CardAdded',
       cardId: card.getId().getValue(),
       name: card.name.getValue(), // TODO: Name public??? 🚧
       columnId,

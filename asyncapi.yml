@@ -69,6 +69,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/ColumnAdded'
         - $ref: '#/components/schemas/CardAdded'
+        - $ref: '#/components/schemas/CardRemoved'
     AddColumnType:
       type: string
       enum: [AddColumn]
@@ -132,6 +133,9 @@ components:
           $ref: '#/components/schemas/CardId'
         boardId:
           $ref: '#/components/schemas/BoardId'
+    CardRemovedType:
+      type: string
+      enum: [CardRemoved]
     RemoveCard:
       type: object
       additionalProperties: false
@@ -143,10 +147,10 @@ components:
           $ref: '#/components/schemas/CardId'
         boardId:
           $ref: '#/components/schemas/BoardId'
-    
+
     CardAddedType:
       type: string
-      enum: [CardAddedType]
+      enum: [CardAdded]
     CardAdded:
       type: object
       additionalProperties: false
@@ -167,3 +171,17 @@ components:
           $ref: '#/components/schemas/CardId'
         columnId:
           $ref: '#/components/schemas/ColumnId'
+    CardRemoved:
+      type: object
+      additionalProperties: false
+      required:
+        - type
+        - boardId
+        - cardId
+      properties:
+        type:
+          $ref: '#/components/schemas/CardRemovedType'
+        boardId:
+          $ref: '#/components/schemas/BoardId'
+        cardId:
+          $ref: '#/components/schemas/CardId'

@@ -11,7 +11,9 @@ export class BoardRepositoryFake extends BoardRepository {
   constructor(boards: Board[] = [wallboxBoard()]) {
     super()
     boards.forEach((board) => {
+      board.flushDomainEvents()
       this.boards.set(board.getId().toString(), board)
+    
     })
   }
 
