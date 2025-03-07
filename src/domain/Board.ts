@@ -1,4 +1,4 @@
-import type { BoardEvent, CardAdded, ColumnAdded } from '../../types/types.ts'
+import type { BoardEvent, CardAdded, CardRemoved, ColumnAdded } from '../../types/types.ts'
 import { BoardId } from './BoardId.ts'
 import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
@@ -38,15 +38,13 @@ export class Board {
   }
 
   removeCard(primitiveCardId: string) {
-    const cardId = CardId.fromString(primitiveCardId)
-    const cardColumn = this.columns.find((column) => column.hasCard(cardId))
-    cardColumn?.removeCard(cardId)
-
-    this.domainEvents.push({
+    const cardRemoved = {
       type: 'CardRemoved',
-      cardId: cardId.getValue(),
+      cardId: primitiveCardId,
       boardId: this.id.getValue()
-    })
+    } satisfies CardRemoved
+
+    this.handle(cardRemoved)
   }
 
   isEmpty() {
@@ -96,6 +94,12 @@ export class Board {
     column.addCard(card)
   }
 
+  private handleCardRemoved(cardRemoved: CardRemoved) {
+    const cardId = CardId.fromString(cardRemoved.cardId)
+    const cardColumn = this.columns.find((column) => column.hasCard(cardId))
+    cardColumn?.removeCard(cardId)
+  }
+
   private handle(boardEvent: BoardEvent) {
     switch (boardEvent.type) {
       case 'ColumnAdded':
@@ -103,6 +107,9 @@ export class Board {
         break
       case 'CardAdded':
         this.handleCardAdded(boardEvent as CardAdded)
+        break
+      case 'CardRemoved':
+        this.handleCardRemoved(boardEvent as CardRemoved)
         break
     }
     this.domainEvents.push(boardEvent)
