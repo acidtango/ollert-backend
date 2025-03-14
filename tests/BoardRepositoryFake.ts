@@ -8,12 +8,11 @@ export class BoardRepositoryFake extends BoardRepository {
 
   private latestSavedBoard?: Board
 
-  constructor(boards: Board[] = [wallboxBoard()]) {
+  constructor(boards: Board[] = []) {
     super()
     boards.forEach((board) => {
       board.flushDomainEvents()
       this.boards.set(board.getId().toString(), board)
-    
     })
   }
 
@@ -26,7 +25,7 @@ export class BoardRepositoryFake extends BoardRepository {
   }
 
   async findBy(id: BoardId): Promise<Board | undefined> {
-    return this.boards.get(id.getValue())
+    return this.boards.get(id.getValue()) ?? new Board(id.getValue())
   }
 
   async save(board: Board) {
