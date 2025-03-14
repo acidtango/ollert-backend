@@ -27,22 +27,22 @@ export class Board {
   }
 
   addColumn(columnId: string, name: string) {
-    const columnAdded = {
+    const columnAdded: ColumnAdded = {
       type: 'ColumnAdded',
       columnId,
       name,
       boardId: this.id.getValue()
-    } satisfies ColumnAdded
+    }
 
     this.handle(columnAdded)
   }
 
   removeCard(primitiveCardId: string) {
-    const cardRemoved = {
+    const cardRemoved: CardRemoved = {
       type: 'CardRemoved',
       cardId: primitiveCardId,
       boardId: this.id.getValue()
-    } satisfies CardRemoved
+    }
 
     this.handle(cardRemoved)
   }
@@ -53,13 +53,13 @@ export class Board {
 
   //TODO: Decide wether or not we should receive the card here or just the params
   addCard(columnId: string, card: Card) {
-    const cardAdded = {
+    const cardAdded: CardAdded = {
       type: 'CardAdded',
       cardId: card.getId().getValue(),
       name: card.name.getValue(), // TODO: Name public??? 🚧
       columnId,
       boardId: this.id.getValue()
-    } satisfies CardAdded
+    }
 
     this.handle(cardAdded)
   }
