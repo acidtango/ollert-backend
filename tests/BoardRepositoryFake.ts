@@ -1,7 +1,6 @@
 import { Board } from '../src/domain/Board.ts'
 import { BoardId } from '../src/domain/BoardId.ts'
 import { BoardRepository } from '../src/domain/BoardRepository.ts'
-import { wallboxBoard } from './BoardMother.ts'
 
 export class BoardRepositoryFake extends BoardRepository {
   private boards: Map<string, Board> = new Map()

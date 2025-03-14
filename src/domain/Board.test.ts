@@ -5,6 +5,7 @@ import { notExistentCardId, REFACTOR_REFINERY_ID } from '../../tests/CardIdMothe
 import { DOING_COLUMN_ID, TODO_COLUMN_ID, todoColumnId } from '../../tests/ColumnIdMother.ts'
 import { Board } from './Board.ts'
 import { Card } from './Card.ts'
+import { DuplicatedColumnError } from './errors/DuplicatedColumnError.ts'
 
 describe('Board', () => {
   it('does not have column on creation', () => {
@@ -17,6 +18,14 @@ describe('Board', () => {
 
   describe('addColumn', () => {
     it('can add columns', () => {
+      const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+
+      board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
+
+      assert(!board.isEmpty())
+    })
+
+    it('cannot add same column twice', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
 
       board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
@@ -36,10 +45,13 @@ describe('Board', () => {
 
     it('can check if a column exists', () => {
       const board = new Board('ecc81f64-7925-4004-b7e1-4f1f26dbbba5')
+      const columnId = 'abfe40bf-22b8-4692-8585-cea01b809493'
 
-      board.addColumn('abfe40bf-22b8-4692-8585-cea01b809493', 'TODO')
+      board.addColumn(columnId, 'TODO')
 
-      assert(board.hasColumn('TODO'))
+      assert.throws(() => {
+        board.addColumn(columnId, 'TODO')
+      }, new DuplicatedColumnError(columnId))
     })
 
     it('can check if a column exists by id', () => {

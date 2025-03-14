@@ -4,6 +4,7 @@ import { Card } from './Card.ts'
 import { CardId } from './CardId.ts'
 import { Column } from './Column.ts'
 import { ColumnId } from './ColumnId.ts'
+import { DuplicatedColumnError } from './errors/DuplicatedColumnError.ts'
 
 export class Board {
   private readonly id: BoardId
@@ -81,7 +82,18 @@ export class Board {
   }
 
   private handleColumnAdded(columnAdded: ColumnAdded) {
+    this.ensureColumnIdDoesNotAlreadyExists(columnAdded.columnId)
     this.columns.push(Column.createNew(columnAdded.columnId, columnAdded.name))
+  }
+
+  private ensureColumnIdDoesNotAlreadyExists(columnId: string) {
+    if (this.hasColumnWithId(columnId)) {
+      throw new DuplicatedColumnError(columnId)
+    }
+  }
+
+  private hasColumnWithId(columnId: string) {
+    return this.columns.some((column) => column.hasId(ColumnId.fromString(columnId)))
   }
 
   private handleCardAdded(cardAdded: CardAdded) {
