@@ -24,5 +24,8 @@
     "typescript": "^5.8.0-dev.20250206",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
+  },
+  "dependencies": {
+    "mongodb": "^6.14.2"
   }
 }

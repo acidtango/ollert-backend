@@ -2,7 +2,7 @@ import assert from 'node:assert'
 import { beforeEach, describe, it, mock } from 'node:test'
 import { LIBEEN_BOARD_ID } from '../../tests/BoardIdMother.ts'
 import { libeenBoard } from '../../tests/BoardMother.ts'
-import { BoardRepositoryFake } from '../../tests/BoardRepositoryFake.ts'
+import { BoardRepositoryMemory } from '../infrastructure/repositories/BoardRepositoryMemory.ts'
 import { IMPLEMENT_HOUSE_FINDER_ID, implementHouseFinderId } from '../../tests/CardIdMother.ts'
 import { RemoveCardHandler } from './RemoveCardHandler.ts'
 import type { CardRemoved } from '../../types/types.ts'
@@ -15,7 +15,7 @@ describe('Remove card handler', () => {
   })
 
   it('remove a card from a board', async () => {
-    const boardRepository = new BoardRepositoryFake([libeenBoard()])
+    const boardRepository = new BoardRepositoryMemory([libeenBoard()])
     const handler = new RemoveCardHandler(boardRepository, eventBus)
 
     await handler.handle({ cardId: IMPLEMENT_HOUSE_FINDER_ID, boardId: LIBEEN_BOARD_ID })
@@ -25,7 +25,7 @@ describe('Remove card handler', () => {
   })
 
   it('Emits an event', async () => {
-    const boardRepository = new BoardRepositoryFake([libeenBoard()])
+    const boardRepository = new BoardRepositoryMemory([libeenBoard()])
     const handler = new RemoveCardHandler(boardRepository, eventBus)
 
     await handler.handle({ cardId: IMPLEMENT_HOUSE_FINDER_ID, boardId: LIBEEN_BOARD_ID })

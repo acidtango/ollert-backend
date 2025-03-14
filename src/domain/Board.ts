@@ -128,10 +128,34 @@ export class Board {
     this.domainEvents.push(boardEvent)
   }
 
+  private apply(boardEvent: BoardEvent) {
+    switch (boardEvent.type) {
+      case 'ColumnAdded':
+        this.handleColumnAdded(boardEvent as ColumnAdded)
+        break
+      case 'CardAdded':
+        this.handleCardAdded(boardEvent as CardAdded)
+        break
+      case 'CardRemoved':
+        this.handleCardRemoved(boardEvent as CardRemoved)
+        break
+    }
+  }
+
   //TODO: the creation of the board should be an event itself so boardId is not needed
-  public static reconstructFrom(boardId: string, events: Array<BoardEvent>) {
+  public static reconstructFrom(boardId: string, events: Iterable<BoardEvent>) {
     const board = new Board(boardId)
-    events.forEach((event) => board.handle(event))
+    for (const event of events) {
+      board.handle(event)
+    }
+    return board
+  }
+
+  public static async reconstructAsync(boardId: string, events: AsyncIterable<BoardEvent>) {
+    const board = new Board(boardId)
+    for await (const event of events) {
+      board.apply(event)
+    }
     return board
   }
 }

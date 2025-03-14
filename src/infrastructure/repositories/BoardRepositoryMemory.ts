@@ -1,8 +1,8 @@
-import { Board } from '../src/domain/Board.ts'
-import { BoardId } from '../src/domain/BoardId.ts'
-import { BoardRepository } from '../src/domain/BoardRepository.ts'
+import { Board } from '../../domain/Board.ts'
+import { BoardId } from '../../domain/BoardId.ts'
+import { BoardRepository } from '../../domain/BoardRepository.ts'
 
-export class BoardRepositoryFake extends BoardRepository {
+export class BoardRepositoryMemory extends BoardRepository {
   private boards: Map<string, Board> = new Map()
 
   private latestSavedBoard?: Board
